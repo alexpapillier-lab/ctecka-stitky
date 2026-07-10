@@ -26,8 +26,8 @@ PX_PER_MM_600 = 600 / 25.4      # 600 DPI – délka
 PRINT_DPI_600 = True            # zapnout 600 DPI tisk
 
 DEFAULT_IMPORTER_TEXT = (
-    "Dovozce: iSwap.cz s.r.o., U Vokovické školy 299/4, 160 00, Praha, "
-    "Česká republika, tel.: +420 773 118 472. Určeno pro profesionální instalaci. Vyrobeno v Číně."
+    "Dovozce: iMobileSentrix Europe B. V. Beursplein 37, 3011AA Rotterdam, Netherlands. "
+    "Email: info@mobilesentrix.com Vyrobeno v Číně. Určeno pro profesionální instalaci."
 )
 
 
@@ -155,7 +155,7 @@ def _draw_fitted_text(draw, text, x, y, max_width, font, max_lines=2):
 
 
 def _parse_display_name(name):
-    """Rozdělí 'LCD displej bílý PREMIUM | iPhone 6S' na součásti."""
+    """Rozdělí 'LCD displej černý PREMIUM | iPhone 6S' na součásti."""
     parts = name.split("|", 1)
     type_raw = parts[0].strip()
     model    = parts[1].strip() if len(parts) > 1 else type_raw
@@ -167,113 +167,157 @@ def _parse_display_name(name):
     else:
         color = None
     variant = next((v for v in ["PREMIUM", "ORIGINAL", "OEM", "COPY"] if v in type_raw.upper()), None)
-    return model, type_raw, color, variant
+
+    # Typ bez barvy (pro levou sekci)
+    color_words = ["černý", "černá", "bílý", "bílá", "cerny", "cerna", "bily", "bila", "black", "white"]
+    type_no_color = type_raw
+    for w in color_words:
+        type_no_color = type_no_color.replace(w, "").replace("  ", " ").strip()
+
+    # Typ bez varianty (pro pravý střední řádek)
+    type_no_variant = type_raw
+    if variant:
+        type_no_variant = type_raw.replace(variant, "").replace("  ", " ").strip()
+
+    # Typ bez barvy a bez varianty
+    type_base = type_no_color
+    if variant:
+        type_base = type_base.replace(variant, "").replace("  ", " ").strip()
+
+    # Zkrácený model pro střední sekci (např. "iPhone 6S" → "iPh 6S")
+    words = model.split()
+    if words:
+        abbr = words[0][:3] + (" " + " ".join(words[1:]) if len(words) > 1 else "")
+    else:
+        abbr = model
+
+    return model, type_raw, color, variant, type_no_color, type_base, abbr
 
 
 def _render_display_label(code, name, height_px, width_px, importer_text, img):
-    """Speciální layout pro displeje: vlevo standard, uprostřed vert. model, vpravo kruh+text."""
-    draw = ImageDraw.Draw(img)
+    """
+    Layout podle .lbx šablony:
+      LEVÁ sekce  (~43%): typ nahoře | WEEE + čárový kód | dovozce dole
+      STŘEDNÍ sekce (~8%): model rotovaný 90° + barevný kruh
+      PRAVÁ sekce (~49%): velký model + typ + (kvalita)
+    """
+    draw  = ImageDraw.Draw(img)
     margin = int(height_px * 0.05)
 
-    model, type_raw, color, variant = _parse_display_name(name)
+    model, type_raw, color, variant, type_no_color, type_base, abbr = _parse_display_name(name)
 
-    # ── Proporce sekcí ───────────────────────────────────────────
-    left_w   = int(width_px * 0.40)
-    mid_w    = int(width_px * 0.13)
-    right_x  = left_w + mid_w
-    right_w  = width_px - right_x
+    # ── Proporce sekcí (odpovídá .lbx: 354.7pt total) ───────────
+    left_w  = int(width_px * 0.43)
+    mid_w   = int(width_px * 0.08)
+    right_x = left_w + mid_w
+    right_w = width_px - right_x
 
     top_h    = int(height_px * 0.62)
     bottom_h = height_px - top_h
 
-    # ── LEVÁ SEKCE – ikona, čárový kód, dovozce ──────────────────
-    icon_size = int((top_h - 2 * margin) * 0.45)
-    icon_y = margin + ((top_h - 2 * margin) - icon_size) // 2
+    # ── LEVÁ SEKCE ───────────────────────────────────────────────
+    # Typ displeje nahoře (tučně)
+    type_area_w = left_w - 2 * margin
+    typ_size = int(height_px * 0.13)
+    while typ_size > int(height_px * 0.07):
+        f = _font(typ_size, bold=True)
+        typ_lines = _wrap_text(draw, type_no_color, f, type_area_w)
+        if len(typ_lines) <= 2:
+            break
+        typ_size -= 1
+    typ_font = _font(typ_size, bold=True)
+    typ_lh   = int(typ_size * 1.2)
+    for i, line in enumerate(typ_lines[:2]):
+        draw.text((margin, margin + i * typ_lh), line, fill="black", font=typ_font)
+    typ_end_y = margin + len(typ_lines[:2]) * typ_lh + int(height_px * 0.02)
+
+    # WEEE ikona vlevo (střední část výšky)
+    icon_avail_h = top_h - typ_end_y - margin
+    icon_size    = int(icon_avail_h * 0.85)
+    icon_y       = typ_end_y + (icon_avail_h - icon_size) // 2
     _draw_weee_icon(draw, margin, icon_y, icon_size, _img_ref=img)
 
-    col_x   = margin + icon_size + int(height_px * 0.06)
-    col_w   = left_w - col_x - margin
-    cur_y   = margin
-
-    # Název (typ displeje) – nahoře v pravém sloupci levé sekce
-    name_font_size = int(height_px * 0.115)
-    while name_font_size > int(height_px * 0.07):
-        f = _font(name_font_size, bold=True)
-        lines = _wrap_text(draw, type_raw, f, col_w)
-        if len(lines) <= 2:
-            break
-        name_font_size -= 1
-    name_f  = _font(name_font_size, bold=True)
-    name_lh = int(name_font_size * 1.18)
-    for line in lines[:2]:
-        draw.text((col_x, cur_y), line, fill="black", font=name_f)
-        cur_y += name_lh
-    cur_y += int(height_px * 0.03)
-
-    # Čárový kód pod názvem
+    # Čárový kód napravo od ikony
     import barcode as bc_mod
     from barcode.writer import ImageWriter
     bc = bc_mod.get("code128", str(code), writer=ImageWriter())
-    bc_img = bc.render({"module_height": 8.0, "font_size": 0, "text_distance": 1,
-                        "quiet_zone": 1, "write_text": False})
-    bc_avail_h = top_h - cur_y - int(height_px * 0.14) - margin
-    bc_target_h = max(int(height_px * 0.2), bc_avail_h)
-    bc_ratio    = bc_target_h / bc_img.height
-    bc_w        = min(int(bc_img.width * bc_ratio), col_w)
-    bc_target_h = int(bc_w / bc_img.width * bc_img.height)
-    bc_img      = bc_img.resize((bc_w, bc_target_h))
-    img.paste(bc_img, (col_x, cur_y))
-    cur_y += bc_target_h + int(height_px * 0.01)
+    bc_img = bc.render({"module_height": 3.0, "font_size": 0, "text_distance": 1,
+                        "quiet_zone": 0, "write_text": False})
+    bc_x      = margin + icon_size + int(height_px * 0.04)
+    bc_avail_w = left_w - bc_x - margin
+    bc_avail_h = icon_avail_h - int(height_px * 0.12)
+    bc_ratio_w = bc_avail_w / bc_img.width
+    bc_w       = bc_avail_w
+    bc_h       = int(bc_img.height * bc_ratio_w)
+    if bc_h > bc_avail_h:
+        bc_h = bc_avail_h
+        bc_w = int(bc_img.width * bc_h / bc_img.height)
+    bc_img = bc_img.resize((bc_w, bc_h))
+    bc_y   = typ_end_y + (icon_avail_h - bc_h - int(height_px * 0.11)) // 2
+    img.paste(bc_img, (bc_x, bc_y))
 
+    # Kód pod čárovým kódem
     code_font = _font(int(height_px * 0.09))
-    draw.text((col_x, cur_y), str(code), fill="black", font=code_font)
+    code_tw   = int(draw.textlength(str(code), font=code_font))
+    draw.text((bc_x + (bc_w - code_tw) // 2, bc_y + bc_h + int(height_px * 0.01)),
+              str(code), fill="black", font=code_font)
 
-    # Dovozce (levá dolní část)
-    max_tw = left_w - 2 * margin
+    # Dovozce dole (levá sekce)
     imp_size = int(height_px * 0.07)
     while imp_size > int(height_px * 0.04):
-        imp_font = _font(imp_size)
-        imp_lines = _wrap_text(draw, importer_text, imp_font, max_tw)
-        if int(imp_size * 1.25) * len(imp_lines) <= bottom_h - margin:
+        imp_font  = _font(imp_size)
+        imp_lines = _wrap_text(draw, importer_text, imp_font, type_area_w)
+        if int(imp_size * 1.2) * len(imp_lines) <= bottom_h - margin:
             break
         imp_size -= 1
-    imp_lh = int(imp_size * 1.25)
+    imp_lh = int(imp_size * 1.2)
     for i, line in enumerate(imp_lines):
-        draw.text((margin, top_h + int(margin * 0.4) + i * imp_lh),
+        draw.text((margin, top_h + int(margin * 0.3) + i * imp_lh),
                   line, fill="black", font=imp_font)
 
-    # ── STŘEDNÍ SEKCE – vertikální model ─────────────────────────
-    vert_font_size = int(height_px * 0.16)
-    vert_font = _font(vert_font_size, bold=True)
-    vert_text = model
-    # Zkrátit pokud se nevejde
-    while vert_font_size > int(height_px * 0.08):
-        vert_font = _font(vert_font_size, bold=True)
-        tw = draw.textlength(vert_text, font=vert_font)
-        if tw <= height_px - 2 * margin:
-            break
-        vert_font_size -= 1
-
-    # Nakresli text do temp obrázku a rotuj 90°
-    tw = int(draw.textlength(vert_text, font=vert_font))
-    th = int(vert_font_size * 1.2)
-    tmp = Image.new("RGB", (tw + 4, th + 4), "white")
-    ImageDraw.Draw(tmp).text((2, 2), vert_text, fill="black", font=vert_font)
-    tmp = tmp.rotate(90, expand=True)  # rotace = čtení zdola nahoru
-    paste_x = left_w + (mid_w - tmp.width) // 2
-    paste_y = (height_px - tmp.height) // 2
-    img.paste(tmp, (paste_x, paste_y))
-
-    # Svislá čára jako oddělovač (vlevo od střední sekce)
+    # ── STŘEDNÍ SEKCE – model rotovaný 90° + barevný kruh ────────
     draw.line([(left_w, margin), (left_w, height_px - margin)], fill="#cccccc", width=1)
 
-    # ── PRAVÁ SEKCE – model + typ + (kruh pokud je barva) ────────
-    r_margin = int(right_w * 0.06)
+    vert_size = int(height_px * 0.17)
+    while vert_size > int(height_px * 0.08):
+        vf = _font(vert_size, bold=True)
+        if draw.textlength(abbr, font=vf) <= height_px - 2 * margin:
+            break
+        vert_size -= 1
+    vf = _font(vert_size, bold=True)
+    tw = int(draw.textlength(abbr, font=vf))
+    th = int(vert_size * 1.2)
+    tmp = Image.new("RGB", (tw + 4, th + 4), "white")
+    ImageDraw.Draw(tmp).text((2, 2), abbr, fill="black", font=vf)
+    tmp = tmp.rotate(90, expand=True)
+
+    circle_r = int(height_px * 0.09) if color else 0
+    circle_gap = int(height_px * 0.03) if color else 0
+    total_mid_h = tmp.height + (circle_gap + circle_r * 2 if color else 0)
+    paste_y = (height_px - total_mid_h) // 2
+    paste_x = left_w + (mid_w - tmp.width) // 2
+    img.paste(tmp, (paste_x, paste_y))
+
+    if color:
+        cy = paste_y + tmp.height + circle_gap
+        cx = left_w + (mid_w - circle_r * 2) // 2
+        lw_c = max(2, int(height_px * 0.022))
+        if color == "black":
+            draw.ellipse([cx, cy, cx + circle_r * 2, cy + circle_r * 2],
+                         fill="black", outline="black")
+        else:
+            draw.ellipse([cx, cy, cx + circle_r * 2, cy + circle_r * 2],
+                         fill="white", outline="black", width=lw_c)
+
+    # ── PRAVÁ SEKCE – velký model + typ + kvalita ────────────────
+    draw.line([(right_x, margin), (right_x, height_px - margin)], fill="#cccccc", width=1)
+
+    r_margin = int(right_w * 0.05)
     rx = right_x + r_margin
     rw = right_w - 2 * r_margin
 
-    # Spočítej výšky všech prvků
-    mod_size = int(height_px * 0.22)
+    # Model (velký, tučný)
+    mod_size = int(height_px * 0.25)
     while mod_size > int(height_px * 0.10):
         f = _font(mod_size, bold=True)
         if draw.textlength(model, font=f) <= rw:
@@ -282,43 +326,40 @@ def _render_display_label(code, name, height_px, width_px, importer_text, img):
     mod_font = _font(mod_size, bold=True)
     mod_h    = int(mod_size * 1.2)
 
-    typ_size = int(height_px * 0.13)
-    while typ_size > int(height_px * 0.07):
-        f = _font(typ_size)
-        typ_lines = _wrap_text(draw, type_raw, f, rw)
-        if len(typ_lines) <= 2:
+    # Typ bez varianty (střední řádek)
+    type_mid = type_base  # bez barvy i varianty
+    t_size = int(height_px * 0.15)
+    while t_size > int(height_px * 0.07):
+        f = _font(t_size)
+        t_lines = _wrap_text(draw, type_mid, f, rw)
+        if len(t_lines) <= 1:
             break
-        typ_size -= 1
-    typ_font  = _font(typ_size)
-    typ_lh    = int(typ_size * 1.2)
-    typ_lines = typ_lines[:2]
+        t_size -= 1
+    t_font = _font(t_size)
+    t_lh   = int(t_size * 1.2)
 
-    circle_r = int(height_px * 0.10) if color else 0
-    circle_h = circle_r * 2 + int(height_px * 0.03) if color else 0
+    # Varianta (velká, tučná) – jen pokud existuje
+    var_size = int(height_px * 0.22)
+    while var_size > int(height_px * 0.10) and variant:
+        f = _font(var_size, bold=True)
+        if draw.textlength(variant, font=f) <= rw:
+            break
+        var_size -= 1
+    var_font = _font(var_size, bold=True)
+    var_h    = int(var_size * 1.2) if variant else 0
 
-    gap = int(height_px * 0.04)
-    total_h = mod_h + gap + len(typ_lines) * typ_lh + (gap + circle_h if color else 0)
+    gap = int(height_px * 0.03)
+    total_h = mod_h + gap + t_lh + (gap + var_h if variant else 0)
     cy = (height_px - total_h) // 2
 
-    # Model
     draw.text((rx, cy), model, fill="black", font=mod_font)
     cy += mod_h + gap
-
-    # Typ
-    for line in typ_lines:
-        draw.text((rx, cy), line, fill="black", font=typ_font)
-        cy += typ_lh
-
-    # Kruh (jen pokud má bílý/černý)
-    if color:
+    for line in t_lines[:1]:
+        draw.text((rx, cy), line, fill="black", font=t_font)
+        cy += t_lh
+    if variant:
         cy += gap
-        lw_c = max(2, int(height_px * 0.022))
-        if color == "black":
-            draw.ellipse([rx, cy, rx + circle_r * 2, cy + circle_r * 2],
-                         fill="black", outline="black")
-        else:
-            draw.ellipse([rx, cy, rx + circle_r * 2, cy + circle_r * 2],
-                         fill="white", outline="black", width=lw_c)
+        draw.text((rx, cy), variant, fill="black", font=var_font)
 
 
 def _calc_min_length_mm(code, name, importer_text, height_px, ppm, min_mm=38, max_mm=62):
@@ -398,17 +439,20 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
 
     # Štítek je rozdělen na horní pásmo (ikona, čárový kód, kód, název)
     # a dolní pásmo (text o dovozci) – aby se nepřekrývaly.
-    top_h = int(height_px * 0.62)
-    bottom_h = height_px - top_h
+    # Horní pásmo = text+ikona, střední = čárový kód, dolní = dovozce
+    text_h = int(height_px * 0.28)
+    bc_h_area = int(height_px * 0.38)
+    bottom_h = height_px - text_h - bc_h_area
+    top_h = text_h  # pro dovozce výpočty níže
 
-    # Ikona – menší (45% výšky místo 100%)
-    icon_size = int((top_h - 2 * margin) * 0.45)
-    icon_y = margin + ((top_h - 2 * margin) - icon_size) // 2
+    # Ikona – menší (45% výšky textu)
+    icon_size = int((text_h - 2 * margin) * 0.8)
+    icon_y = margin + ((text_h - 2 * margin) - icon_size) // 2
     if show_weee:
         _draw_weee_icon(draw, margin, icon_y, icon_size, _img_ref=img)
 
     after_icon = margin + icon_size + int(height_px * 0.06)
-    available_name_h = top_h - 2 * margin
+    available_name_h = text_h - 2 * margin
     name = name or ""
 
     def _fit_name(text, bold, max_w, max_h, max_lines, start_size):
@@ -423,7 +467,7 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         return _font(size, bold=bold), _wrap_text(draw, text, _font(size, bold=bold), max_w)[:max_lines]
 
     # ── Text (model + popis) hned za ikonou ──────────────────────
-    text_area_w = int((width_px - after_icon - margin) * 0.52)
+    text_area_w = width_px - after_icon - margin
     name_x = after_icon
 
     def _cx(line, font, area_x, area_w):
@@ -449,41 +493,41 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         for i, line in enumerate(name_lines):
             draw.text((_cx(line, name_font, name_x, text_area_w), margin + i * name_lh), line, fill="black", font=name_font)
 
-    # ── Čárový kód vpravo – rotovaný 90° (úspora místa) ─────────
+    # ── Čárový kód – pod textem, přes celou šířku štítku ────────────
     import barcode
     from barcode.writer import ImageWriter
     bc = barcode.get("code128", str(code), writer=ImageWriter())
-    bc_img = bc.render({"module_height": 22.0, "font_size": 0, "text_distance": 1,
-                        "quiet_zone": 1, "write_text": False})
-    # Rotuj 90° – barcode se stane sloupeček
-    bc_img = bc_img.rotate(90, expand=True)
-    # Škáluj na výšku dostupné oblasti
-    code_font_size = int(height_px * 0.09)
-    code_row_h = int(code_font_size * 1.3)
-    bc_avail_h = top_h - 2 * margin - code_row_h
-    bc_ratio   = bc_avail_h / bc_img.height
-    bc_h_scaled = bc_avail_h
-    bc_w_scaled = int(bc_img.width * bc_ratio)
+
+    code_font_size = int(height_px * 0.08)
+    code_row_h = int(code_font_size * 1.4)
+    bc_avail_h = bc_h_area - code_row_h - margin
+    bc_avail_w = width_px - 2 * margin
+
+    bc_img = bc.render({"module_height": 3.0, "font_size": 0, "text_distance": 1,
+                        "quiet_zone": 0, "write_text": False})
+    # Škáluj na celou dostupnou šířku, pak ořízni výšku pokud přesahuje
+    bc_ratio_w = bc_avail_w / bc_img.width
+    bc_w_scaled = bc_avail_w
+    bc_h_scaled = int(bc_img.height * bc_ratio_w)
+    if bc_h_scaled > bc_avail_h:
+        bc_h_scaled = bc_avail_h
+        bc_w_scaled = int(bc_img.width * bc_avail_h / bc_img.height)
     bc_img = bc_img.resize((bc_w_scaled, bc_h_scaled))
 
-    # Kód pod čárovým kódem (rotovaný text)
-    code_font = _font(int(height_px * 0.09))
-    code_tw   = int(draw.textlength(str(code), font=code_font))
-    code_h    = int(height_px * 0.12)
+    bc_y = text_h
+    bc_x = margin + (bc_avail_w - bc_w_scaled) // 2
+    img.paste(bc_img, (bc_x, bc_y))
 
-    bc_x = after_icon + text_area_w + int(height_px * 0.06)
-    img.paste(bc_img, (bc_x, margin))
-
-    # Kód produktu – pod čárovým kódem, centrovaný
+    # Kód produktu pod čárovým kódem
     code_font = _font(code_font_size)
     code_tw = int(draw.textlength(str(code), font=code_font))
-    code_y = margin + bc_h_scaled + int(height_px * 0.01)
-    draw.text((bc_x + (bc_w_scaled - code_tw) // 2, code_y),
+    draw.text((bc_x + (bc_w_scaled - code_tw) // 2, bc_y + bc_h_scaled + int(height_px * 0.01)),
               str(code), fill="black", font=code_font)
 
-    # Dolní pásmo – text o dovozci, font se postupně zmenší, pokud se nevejde
+    # Dolní pásmo – text o dovozci
     max_text_width = width_px - 2 * margin
     available_h = bottom_h - margin
+    top_h = text_h + bc_h_area  # y offset pro dovozce
     font_size = int(height_px * 0.075)
     while font_size > int(height_px * 0.04):
         importer_font = _font(font_size)
