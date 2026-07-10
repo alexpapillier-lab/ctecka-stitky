@@ -1,0 +1,11 @@
+{
+  "/Users/alexpapillier/Desktop/CteckaStitkySW/Sources/CteckaStitkySW/App.swift" : {
+    "abi-baseline-json" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW.abi.json",
+    "const-values" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW-primary.swiftconstvalues",
+    "dependencies" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW-primary.d",
+    "diagnostics" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW-primary.dia",
+    "swiftdoc" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW.swiftdoc",
+    "swiftmodule" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW.swiftmodule",
+    "swiftsourceinfo" : "/Users/alexpapillier/Desktop/CteckaStitkySW/build/Build/Intermediates.noindex/CteckaStitkySW.build/Release/CteckaStitkySW.build/Objects-normal/arm64/CteckaStitkySW.swiftsourceinfo"
+  }
+}

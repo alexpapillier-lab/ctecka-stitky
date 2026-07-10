@@ -50,9 +50,13 @@ struct ModeTab: View {
             .foregroundColor(selected ? .accentColor : .secondary)
         }
         .buttonStyle(.plain)
-        .overlay(alignment: .bottom) {
-            if selected { Rectangle().frame(height: 2).foregroundColor(.accentColor) }
-        }
+        .overlay(
+            Group {
+                if selected {
+                    VStack { Spacer(); Rectangle().frame(height: 2).foregroundColor(.accentColor) }
+                }
+            }
+        )
     }
 }
 
@@ -135,8 +139,11 @@ struct ManualView: View {
                         HStack(spacing: 16) {
                             HStack {
                                 Text("Délka:").foregroundColor(.secondary)
-                                TextField("", value: $lengthMM, format: .number)
-                                    .frame(width: 60).textFieldStyle(.roundedBorder)
+                                TextField("", text: Binding(
+                                    get: { "\(lengthMM)" },
+                                    set: { if let v = Int($0) { lengthMM = v } }
+                                ))
+                                .frame(width: 60).textFieldStyle(.roundedBorder)
                                 Text("mm").foregroundColor(.secondary)
                             }
                             HStack {
@@ -168,7 +175,7 @@ struct ManualView: View {
                                     Label("Tisknout", systemImage: "printer")
                                 }
                             }
-                            .buttonStyle(.borderedProminent)
+                            .buttonStyle(.bordered)
                             .disabled(isGenerating || isPrinting)
                         }
 
@@ -245,28 +252,23 @@ struct ManualView: View {
             .frame(minWidth: 500)
         }
         .onAppear { Task { await vm.load() } }
-        .confirmationDialog(
-            "Zobrazit ikonu přeškrtnuté popelnice (WEEE)?",
-            isPresented: $showWEEEDialog,
-            titleVisibility: .visible
-        ) {
-            Button("Ano – zobrazit") {
-                if let p = selected {
-                    let product = p
-                    Task { await WEEEPrefs.shared.set(true, for: product.code) }
-                    runPendingAction(product: p)
+        .alert(isPresented: $showWEEEDialog) {
+            Alert(
+                title: Text("Zobrazit ikonu přeškrtnuté popelnice (WEEE)?"),
+                message: Text("Volba se uloží pro příští tisky tohoto produktu."),
+                primaryButton: .default(Text("Ano – zobrazit")) {
+                    if let p = selected {
+                        Task { await WEEEPrefs.shared.set(true, for: p.code) }
+                        runPendingAction(product: p)
+                    }
+                },
+                secondaryButton: .cancel(Text("Ne – nezobrazovat")) {
+                    if let p = selected {
+                        Task { await WEEEPrefs.shared.set(false, for: p.code) }
+                        runPendingAction(product: p)
+                    }
                 }
-            }
-            Button("Ne – nezobrazovat") {
-                if let p = selected {
-                    let product = p
-                    Task { await WEEEPrefs.shared.set(false, for: product.code) }
-                    runPendingAction(product: p)
-                }
-            }
-            Button("Zrušit", role: .cancel) { pendingAction = nil }
-        } message: {
-            Text("Volba se uloží pro příští tisky tohoto produktu.")
+            )
         }
         .onChange(of: selected) { product in
             labelImage = nil
@@ -365,8 +367,8 @@ struct ScanView: View {
                     Label(scan.isRunning ? "Zastavit" : "Spustit",
                           systemImage: scan.isRunning ? "stop.circle" : "play.circle")
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(scan.isRunning ? .red : .green)
+                .buttonStyle(.bordered)
+                .foregroundColor(scan.isRunning ? .red : .green)
             }
             .padding(16)
             .background(Color(NSColor.controlBackgroundColor))
