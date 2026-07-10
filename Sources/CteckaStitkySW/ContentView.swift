@@ -146,9 +146,30 @@ struct ManualView: View {
                                 .frame(width: 60).textFieldStyle(.roundedBorder)
                                 Text("mm").foregroundColor(.secondary)
                             }
-                            HStack {
+                            HStack(spacing: 4) {
                                 Text("Kopií:").foregroundColor(.secondary)
-                                Stepper("\(copies)", value: $copies, in: 1...50).frame(width: 100)
+                                Button {
+                                    if copies > 1 { copies -= 1 }
+                                } label: {
+                                    Image(systemName: "minus")
+                                        .frame(width: 32, height: 32)
+                                        .background(Color(NSColor.controlBackgroundColor))
+                                        .cornerRadius(6)
+                                }
+                                .buttonStyle(.plain)
+                                Text("\(copies)")
+                                    .frame(width: 32)
+                                    .multilineTextAlignment(.center)
+                                    .font(.body.monospacedDigit())
+                                Button {
+                                    if copies < 50 { copies += 1 }
+                                } label: {
+                                    Image(systemName: "plus")
+                                        .frame(width: 32, height: 32)
+                                        .background(Color(NSColor.controlBackgroundColor))
+                                        .cornerRadius(6)
+                                }
+                                .buttonStyle(.plain)
                             }
                             Picker("", selection: $dpi600) {
                                 Text("300 DPI").tag(false)
