@@ -7,6 +7,8 @@ struct Product: Identifiable, Decodable, Equatable, Hashable {
     let name: String
     let pair_code: String?
     let show_weee: Bool?
+    /// Kód dodavatele (MobileSentrix / Apple). Pole může nést více kódů oddělených mezerou.
+    let part_number: String?
 
     var isDisplay: Bool {
         // Vezmi část před "|" jako typ produktu

@@ -85,7 +85,7 @@ struct ManualView: View {
             VStack(spacing: 0) {
                 HStack {
                     Image(systemName: "magnifyingglass").foregroundColor(.secondary)
-                    TextField("Hledat kód nebo název…", text: $vm.search).textFieldStyle(.plain)
+                    TextField("Hledat kód, název, EAN nebo kód dodavatele…", text: $vm.search).textFieldStyle(.plain)
                     if !vm.search.isEmpty {
                         Button { vm.search = "" } label: {
                             Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
@@ -124,6 +124,10 @@ struct ManualView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(product.code).font(.headline)
                                 Text(product.name).font(.subheadline).foregroundColor(.secondary).lineLimit(2)
+                                if let pn = product.part_number, !pn.isEmpty {
+                                    Text("Dodavatel: \(pn)")
+                                        .font(.caption).foregroundColor(.secondary)
+                                }
                             }
                             Spacer()
                             if product.isDisplay {
@@ -482,7 +486,12 @@ class ProductsViewModel: ObservableObject {
     var filtered: [Product] {
         guard !search.isEmpty else { return products }
         let q = search.lowercased()
-        return products.filter { $0.code.lowercased().contains(q) || $0.name.lowercased().contains(q) }
+        return products.filter {
+            $0.code.lowercased().contains(q)
+                || $0.name.lowercased().contains(q)
+                || $0.ean.contains(q)
+                || ($0.part_number?.lowercased().contains(q) ?? false)
+        }
     }
 
     func load() async {

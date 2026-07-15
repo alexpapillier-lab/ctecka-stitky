@@ -3,7 +3,9 @@
 DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "=== Aktualizace štítků ==="
-curl -fsSL "https://raw.githubusercontent.com/alexpapillier-lab/ctecka-stitky/main/Scripts/label_printer.py" -o "$DIR/Scripts/label_printer.py" && echo "✓ label_printer.py" || echo "✗ Chyba při stahování label_printer.py"
-curl -fsSL "https://raw.githubusercontent.com/alexpapillier-lab/ctecka-stitky/main/Scripts/weee.png" -o "$DIR/Scripts/weee.png" && echo "✓ weee.png" || echo "✗ Chyba při stahování weee.png"
+BASE="https://raw.githubusercontent.com/alexpapillier-lab/ctecka-stitky/main/Scripts"
+for f in label_printer.py scan_print.py weee.png; do
+  curl -fsSL "$BASE/$f" -o "$DIR/Scripts/$f" && echo "✓ $f" || echo "✗ Chyba při stahování $f"
+done
 echo "=== Hotovo ==="
 read -p "Stiskni Enter pro zavření..."

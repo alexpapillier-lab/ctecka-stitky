@@ -11,7 +11,7 @@ class SupabaseService {
         var offset = 0
         let batch = 1000
         while true {
-            var req = URLRequest(url: URL(string: "\(url)?select=code,ean,name,pair_code,show_weee&order=code")!)
+            var req = URLRequest(url: URL(string: "\(url)?select=code,ean,name,pair_code,show_weee,part_number&order=code")!)
             req.setValue(key, forHTTPHeaderField: "apikey")
             req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
             req.setValue("\(offset)-\(offset + batch - 1)", forHTTPHeaderField: "Range")
