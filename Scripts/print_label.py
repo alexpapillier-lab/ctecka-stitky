@@ -13,7 +13,7 @@ dpi_600   = (sys.argv[5] == "1") if len(sys.argv) > 5 else True
 weee      = (sys.argv[6] == "1") if len(sys.argv) > 6 else True
 
 img = render_label_image(code, name, length_mm=length_mm, dpi_600=dpi_600, show_weee=weee)
-ok, err = print_label(img, copies=copies)
+ok, err = print_label(img, copies=copies, dpi_600=dpi_600)
 if ok:
     print("OK")
 else:
