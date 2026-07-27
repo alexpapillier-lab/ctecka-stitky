@@ -489,8 +489,8 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     # Štítek je rozdělen na horní pásmo (ikona, čárový kód, kód, název)
     # a dolní pásmo (text o dovozci) – aby se nepřekrývaly.
     # Horní pásmo = text+ikona, střední = čárový kód, dolní = dovozce
-    text_h = int(height_px * 0.28)
-    bc_h_area = int(height_px * 0.38)
+    text_h = int(height_px * 0.36)
+    bc_h_area = int(height_px * 0.30)
     bottom_h = height_px - text_h - bc_h_area
     top_h = text_h  # pro dovozce výpočty níže
 
@@ -525,19 +525,19 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
 
     if "|" in name:
         desc, device = [p.strip() for p in name.split("|", 1)]
-        dev_font, dev_lines = _fit_name(device, True, text_area_w, int(available_name_h * 0.5), 2, int(height_px * 0.19))
+        dev_font, dev_lines = _fit_name(device, True, text_area_w, int(available_name_h * 0.55), 2, int(height_px * 0.24))
         dev_lh = int(dev_font.size * 1.15)
         used_h = len(dev_lines) * dev_lh
         for i, line in enumerate(dev_lines):
             draw.text((_cx(line, dev_font, name_x, text_area_w), margin + i * dev_lh), line, fill="black", font=dev_font)
         desc_start_y = margin + used_h + int(height_px * 0.02)
         desc_avail_h = top_h - desc_start_y - margin
-        desc_font, desc_lines = _fit_name(desc, False, text_area_w, desc_avail_h, 3, int(height_px * 0.155))
+        desc_font, desc_lines = _fit_name(desc, False, text_area_w, desc_avail_h, 3, int(height_px * 0.19))
         desc_lh = int(desc_font.size * 1.15)
         for i, line in enumerate(desc_lines):
             draw.text((_cx(line, desc_font, name_x, text_area_w), desc_start_y + i * desc_lh), line, fill="black", font=desc_font)
     else:
-        name_font, name_lines = _fit_name(name, True, text_area_w, available_name_h, 4, int(height_px * 0.19))
+        name_font, name_lines = _fit_name(name, True, text_area_w, available_name_h, 4, int(height_px * 0.24))
         name_lh = int(name_font.size * 1.15)
         for i, line in enumerate(name_lines):
             draw.text((_cx(line, name_font, name_x, text_area_w), margin + i * name_lh), line, fill="black", font=name_font)
