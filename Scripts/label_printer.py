@@ -27,7 +27,7 @@ PX_PER_MM_600 = 600 / 25.4      # 600 DPI – délka
 PRINT_DPI_600 = True            # zapnout 600 DPI tisk
 
 DEFAULT_IMPORTER_TEXT = (
-    "Dovozce: iMobileSentrix Europe B. V. Beursplein 37, 3011AA Rotterdam, Netherlands. "
+    "Dovozce: MobileSentrix Europe B. V. Beursplein 37, 3011AA Rotterdam, Netherlands. "
     "Email: info@mobilesentrix.com Vyrobeno v Číně. Určeno pro profesionální instalaci."
 )
 
@@ -525,19 +525,19 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
 
     if "|" in name:
         desc, device = [p.strip() for p in name.split("|", 1)]
-        dev_font, dev_lines = _fit_name(device, True, text_area_w, int(available_name_h * 0.5), 2, int(height_px * 0.16))
+        dev_font, dev_lines = _fit_name(device, True, text_area_w, int(available_name_h * 0.5), 2, int(height_px * 0.19))
         dev_lh = int(dev_font.size * 1.15)
         used_h = len(dev_lines) * dev_lh
         for i, line in enumerate(dev_lines):
             draw.text((_cx(line, dev_font, name_x, text_area_w), margin + i * dev_lh), line, fill="black", font=dev_font)
         desc_start_y = margin + used_h + int(height_px * 0.02)
         desc_avail_h = top_h - desc_start_y - margin
-        desc_font, desc_lines = _fit_name(desc, False, text_area_w, desc_avail_h, 3, int(height_px * 0.13))
+        desc_font, desc_lines = _fit_name(desc, False, text_area_w, desc_avail_h, 3, int(height_px * 0.155))
         desc_lh = int(desc_font.size * 1.15)
         for i, line in enumerate(desc_lines):
             draw.text((_cx(line, desc_font, name_x, text_area_w), desc_start_y + i * desc_lh), line, fill="black", font=desc_font)
     else:
-        name_font, name_lines = _fit_name(name, True, text_area_w, available_name_h, 4, int(height_px * 0.16))
+        name_font, name_lines = _fit_name(name, True, text_area_w, available_name_h, 4, int(height_px * 0.19))
         name_lh = int(name_font.size * 1.15)
         for i, line in enumerate(name_lines):
             draw.text((_cx(line, name_font, name_x, text_area_w), margin + i * name_lh), line, fill="black", font=name_font)
