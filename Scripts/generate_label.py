@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generuje PNG štítku. Argumenty: code name length_mm output_path"""
+"""Generuje PNG štítku. Argumenty: code name length_mm output_path [dpi600] [weee] [serial]"""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from label_printer import render_label_image
@@ -11,6 +11,8 @@ length_mm = int(sys.argv[3])
 output    = sys.argv[4]
 dpi_600   = (sys.argv[5] == "1") if len(sys.argv) > 5 else True
 weee      = (sys.argv[6] == "1") if len(sys.argv) > 6 else True
+serial    = sys.argv[7] if len(sys.argv) > 7 and sys.argv[7] else None
 
-img = render_label_image(code, name, length_mm=length_mm, dpi_600=dpi_600, show_weee=weee)
+img = render_label_image(code, name, length_mm=length_mm, dpi_600=dpi_600, show_weee=weee,
+                          serial_number=serial)
 img.save(output)
