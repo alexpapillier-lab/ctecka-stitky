@@ -21,6 +21,10 @@ for f in label_printer.py scan_print.py weee.png; do
   fi
 done
 
+# Smaž zkompilovanou cache – jinak Python za určitých okolností (např.
+# posunuté systémové hodiny) může spustit starou verzi místo právě stažené.
+rm -rf "$DIR/Scripts/__pycache__"
+
 if [ "$FAILED" = "1" ]; then
   echo "=== Dokončeno s chybami ==="
 else
