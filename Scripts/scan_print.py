@@ -141,12 +141,27 @@ def run():
         chunk = ser.read(64)
         if chunk:
             buf += chunk
-            if b"\r" in buf or b"\n" in buf:
-                barcode = buf.replace(b"\r", b"").replace(b"\n", b"").decode("utf-8", errors="ignore").strip()
-                buf = b""
-                if barcode:
-                    handle(barcode)
+            # Zpracuj KAŽDÝ kompletní řádek zvlášť (oddělený \r nebo \n).
+            # Nedokončený zbytek zůstane v bufferu na příště – takže i rychlé
+            # skenování za sebou = jeden štítek na každý sken (nic se neslepí).
+            buf = _process_lines(buf)
         time.sleep(0.05)
+
+
+def _process_lines(buf):
+    """Vytiskne každý ukončený kód z bufferu, vrátí nedokončený zbytek."""
+    while True:
+        idx = -1
+        for sep in (b"\r", b"\n"):
+            i = buf.find(sep)
+            if i != -1 and (idx == -1 or i < idx):
+                idx = i
+        if idx == -1:
+            return buf                      # žádný celý řádek – zbytek nech na příště
+        line, buf = buf[:idx], buf[idx + 1:]
+        barcode = line.decode("utf-8", errors="ignore").strip()
+        if barcode:
+            handle(barcode)
 
 
 signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
