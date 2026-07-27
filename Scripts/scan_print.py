@@ -7,9 +7,11 @@ a vytiskne štítek. Rozpozná EAN, náš kód produktu i kód dodavatele
 Výstup: JSON řádky  {"status": "ok"|"error"|"info", "msg": "..."}
 """
 import sys, os, json, time, signal
+import urllib.request, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-import requests
+# Používá se stdlib urllib (ne requests) – na iMacu není requests nainstalovaný
+# a stdlib je vždy k dispozici, takže scan mód nespadne na chybějící knihovně.
 
 SUPABASE_URL = "https://osinlzagjimyrzjpdxai.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4"
@@ -23,9 +25,13 @@ def emit(status, msg):
 
 
 def _get(query):
-    r = requests.get(f"{SUPABASE_URL}/rest/v1/products?{SELECT}&{query}",
-                     headers=HEADERS, timeout=6)
-    return r.json() if r.ok else []
+    url = f"{SUPABASE_URL}/rest/v1/products?{SELECT}&{query}"
+    req = urllib.request.Request(url, headers=HEADERS)
+    try:
+        with urllib.request.urlopen(req, timeout=6) as r:
+            return json.loads(r.read())
+    except Exception:
+        return []
 
 
 def lookup(barcode):
@@ -33,17 +39,18 @@ def lookup(barcode):
     Najde produkt podle EAN, našeho kódu, nebo kódu dodavatele.
     Vrací (produkty, zdroj). Více produktů = nejednoznačné.
     """
+    q = urllib.parse.quote(barcode, safe="")
     for field, label in (("ean", "EAN"), ("code", "kód produktu")):
-        found = _get(f"{field}=eq.{barcode}&limit=2")
+        found = _get(f"{field}=eq.{q}&limit=2")
         if found:
             return found, label
 
     # Kód dodavatele: přesná shoda, pak částečná (pole může nést více kódů)
-    found = _get(f"part_number=eq.{barcode}&limit=5")
+    found = _get(f"part_number=eq.{q}&limit=5")
     if found:
         return found, "kód dodavatele"
 
-    found = _get(f"part_number=like.*{barcode}*&limit=5")
+    found = _get(f"part_number=like.*{q}*&limit=5")
     # like.*X* by chytlo i kód, který je jen podřetězcem jiného – ověř po tokenech
     exact = [p for p in found if barcode in (p.get("part_number") or "").split()]
     if exact:
