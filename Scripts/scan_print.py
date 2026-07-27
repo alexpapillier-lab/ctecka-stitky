@@ -6,7 +6,7 @@ a vytiskne štítek. Rozpozná EAN, náš kód produktu i kód dodavatele
 (MobileSentrix / Apple part number).
 Výstup: JSON řádky  {"status": "ok"|"error"|"info", "msg": "..."}
 """
-import sys, os, json, time, signal
+import sys, os, json, time, signal, ssl
 import urllib.request, urllib.parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,13 +24,30 @@ def emit(status, msg):
     print(json.dumps({"status": status, "msg": msg}), flush=True)
 
 
+def _default_ctx():
+    # Když je k dispozici certifi, použij jeho aktuální CA balík (plné ověření).
+    try:
+        import certifi
+        return ssl.create_default_context(cafile=certifi.where())
+    except Exception:
+        return ssl.create_default_context()
+
+_CTX = _default_ctx()
+_UNVERIFIED = ssl._create_unverified_context()
+
+
 def _get(query):
-    # Chyby spojení se NEschovávají – propagují se nahoru, aby se ukázal
-    # skutečný důvod (SSL, síť) místo zavádějícího „produkt nenalezen".
+    # Nejdřív ověřené spojení; na Big Sur má starý Python zastaralé CA certy,
+    # takže při chybě ověření spojení zopakuj bez kontroly certifikátu
+    # (TLS šifrování zůstává). Ostatní chyby (síť) se propagují nahoru.
     url = f"{SUPABASE_URL}/rest/v1/products?{SELECT}&{query}"
     req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=6) as r:
-        return json.loads(r.read())
+    try:
+        with urllib.request.urlopen(req, timeout=6, context=_CTX) as r:
+            return json.loads(r.read())
+    except ssl.SSLError:
+        with urllib.request.urlopen(req, timeout=6, context=_UNVERIFIED) as r:
+            return json.loads(r.read())
 
 
 def lookup(barcode):
