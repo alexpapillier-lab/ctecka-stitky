@@ -25,13 +25,12 @@ def emit(status, msg):
 
 
 def _get(query):
+    # Chyby spojení se NEschovávají – propagují se nahoru, aby se ukázal
+    # skutečný důvod (SSL, síť) místo zavádějícího „produkt nenalezen".
     url = f"{SUPABASE_URL}/rest/v1/products?{SELECT}&{query}"
     req = urllib.request.Request(url, headers=HEADERS)
-    try:
-        with urllib.request.urlopen(req, timeout=6) as r:
-            return json.loads(r.read())
-    except Exception:
-        return []
+    with urllib.request.urlopen(req, timeout=6) as r:
+        return json.loads(r.read())
 
 
 def lookup(barcode):
@@ -86,7 +85,8 @@ def handle(barcode):
         return
 
     if not products:
-        emit("error", f"Produkt nenalezen: {barcode}")
+        # repr ukáže i neviditelné znaky, pokud je čtečka přidává
+        emit("error", f"Produkt nenalezen: {barcode!r} (délka {len(barcode)})")
         return
 
     if len(products) > 1:
