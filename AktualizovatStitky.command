@@ -9,7 +9,18 @@ echo "=== Aktualizace štítků ==="
 API="https://api.github.com/repos/alexpapillier-lab/ctecka-stitky/contents/Scripts"
 FAILED=0
 
-for f in label_printer.py scan_print.py weee.png; do
+# Seznam souborů se načítá ze serveru, aby nově přidaný skript nezůstal
+# neaktualizovaný – dřív byl natvrdo a chyběly v něm print_label.py
+# a generate_label.py, takže appka volala jejich starou verzi.
+FILES=$(curl -fsSL "$API" 2>/dev/null \
+  | /usr/bin/python3 -c "import sys,json;print(' '.join(f['name'] for f in json.load(sys.stdin)))" 2>/dev/null)
+
+if [ -z "$FILES" ]; then
+  echo "… seznam ze serveru nelze načíst, používám záložní"
+  FILES="label_printer.py generate_label.py print_label.py scan_print.py weee.png"
+fi
+
+for f in $FILES; do
   TMP="$DIR/Scripts/.$f.new"
   if curl -fsSL -H "Accept: application/vnd.github.raw" "$API/$f" -o "$TMP" && [ -s "$TMP" ]; then
     mv "$TMP" "$DIR/Scripts/$f"     # přepiš až po úspěšném stažení
