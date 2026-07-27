@@ -2,6 +2,7 @@
 """Generování a tisk štítků na Brother QL-700 (29mm nekonečná páska, USB)."""
 
 import os
+import re
 from PIL import Image, ImageDraw, ImageFont
 
 PRINTER_MODEL = "QL-700"
@@ -29,6 +30,54 @@ DEFAULT_IMPORTER_TEXT = (
     "Dovozce: iMobileSentrix Europe B. V. Beursplein 37, 3011AA Rotterdam, Netherlands. "
     "Email: info@mobilesentrix.com Vyrobeno v Číně. Určeno pro profesionální instalaci."
 )
+
+APPLE_IMPORTER_TEXT = (
+    "Dovozce: Apple Distribution International Ltd. Hollyhill Industrial Estate, "
+    "Hollyhill, Cork T23 YK84, Ireland. Email: RegulatoryEU@group.apple.com "
+    "Web: support.apple.com/self-service-repair"
+)
+
+DYSON_IMPORTER_TEXT = (
+    "Dovozce: DYSON GMBH Lichtstr. 43e, 50825 Köln, Germany. "
+    "Email: infoline@dyson.com Web: dyson.de"
+)
+
+ISWAP_IMPORTER_TEXT = (
+    "Dovozce: iSwap.cz s.r.o. U Vokovické školy 299/4, 160 00 Praha. "
+    "IČ: 14340101, DIČ: CZ14340101"
+)
+
+# Nářadí a spotřební materiál (šroubováky, pinzety, pásky, lepidla, čepelky…) = iSwap.cz.
+_TOOL_KEYWORDS = [
+    "šroubovák", "nářadí", "otevírací", "otevírák", "otevíra", "skalpel", "pinzeta",
+    "sání", "přísavk", "lepidlo", "lepící páska", "lepici paska", "kaptonová",
+    "čistič", "izopropyl", "stěrka", "kartáč", "kladívko", "kleště", "žiletka",
+    "trsátko", "iopener", "opener", "tavná pistole", "pistole na aplikaci",
+    "rukavice", "brýle", "lupa", "mikroskop", "podložka", "štípací", "čepel",
+    "břity", "páčidlo", "šuplík", "wowpad",
+]
+
+
+def classify_importer(name):
+    """Podle názvu produktu určí, kdo je na štítku uveden jako dovozce.
+
+    Priorita: Dyson > Apple (originální baterie / těsnění / AirPods) >
+    iSwap.cz (ostatní originální díly + nářadí a spotřební materiál) >
+    výchozí MobileSentrix.
+    """
+    n = (name or "").lower()
+
+    if "dyson" in n:
+        return DYSON_IMPORTER_TEXT
+
+    # "originální baterie" i "originální Apple baterie" (slovo Apple mezi nimi)
+    if re.search(r"origin\w*\s+(?:apple\s+)?baterie", n) or "originální těsnění" in n or "airpod" in n:
+        return APPLE_IMPORTER_TEXT
+
+    if "originální" in n or any(kw in n for kw in _TOOL_KEYWORDS):
+        return ISWAP_IMPORTER_TEXT
+
+    return DEFAULT_IMPORTER_TEXT
 
 
 def mm_to_px(mm):
@@ -409,7 +458,7 @@ def _calc_min_length_mm(code, name, importer_text, height_px, ppm, min_mm=38, ma
 def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True):
     """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape)."""
     if importer_text is None:
-        importer_text = DEFAULT_IMPORTER_TEXT
+        importer_text = classify_importer(name)
     if dpi_600 is None:
         dpi_600 = PRINT_DPI_600
 
