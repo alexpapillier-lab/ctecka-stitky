@@ -17,6 +17,18 @@ def is_display(name):
         return False
     return any(kw in t for kw in _DISPLAY_KEYWORDS)
 
+def needs_serial_number(name):
+    """AirPods sluchátka/nabíjecí pouzdra se trackují podle sériového čísla
+    jednotky (párování/záruka) – vyžadují ruční vepsání SN před tiskem.
+    Nechytá baterie do nich (Ampsentrix/Baterie …), špunty ani příslušenství."""
+    n = (name or "").lower().strip()
+    if "airpod" not in n:
+        return False
+    if not n.startswith("náhradní"):
+        return False
+    return "sluchátko" in n or "pouzdr" in n
+
+
 def default_length(name):
     return 125 if is_display(name) else 62
 LABEL_SIZE_CODE = "29"          # brother_ql kód pro 29mm nekonečnou pásku
@@ -455,10 +467,16 @@ def _calc_min_length_mm(code, name, importer_text, height_px, ppm, min_mm=38, ma
     return max_mm
 
 
-def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True):
-    """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape)."""
+def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True,
+                        serial_number=None):
+    """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape).
+
+    serial_number: pokud je zadáno (AirPods sluchátka/pouzdra, viz needs_serial_number),
+    čárový kód i text pod ním kóduje sériové číslo jednotky místo kódu produktu.
+    """
     if importer_text is None:
         importer_text = classify_importer(name)
+    barcode_payload = serial_number if serial_number else code
     if dpi_600 is None:
         dpi_600 = PRINT_DPI_600
 
@@ -489,8 +507,8 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     # Štítek je rozdělen na horní pásmo (ikona, čárový kód, kód, název)
     # a dolní pásmo (text o dovozci) – aby se nepřekrývaly.
     # Horní pásmo = text+ikona, střední = čárový kód, dolní = dovozce
-    text_h = int(height_px * 0.36)
-    bc_h_area = int(height_px * 0.30)
+    text_h = int(height_px * 0.30)
+    bc_h_area = int(height_px * 0.40)
     bottom_h = height_px - text_h - bc_h_area
     top_h = text_h  # pro dovozce výpočty níže
 
@@ -542,15 +560,21 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         for i, line in enumerate(name_lines):
             draw.text((_cx(line, name_font, name_x, text_area_w), margin + i * name_lh), line, fill="black", font=name_font)
 
-    # ── Čárový kód – pod textem, přes celou šířku štítku ────────────
+    # ── Čárový kód – pod textem, přes celou šířku štítku. Text s kódem/SN
+    # jede VEDLE čárového kódu (ne pod ním), aby měl kód celou výšku bc_h_area
+    # k dispozici – jinak se při málo místě zmenšuje i šířka a kód je nečitelný.
     import barcode
     from barcode.writer import ImageWriter
-    bc = barcode.get("code128", str(code), writer=ImageWriter())
+    bc = barcode.get("code128", str(barcode_payload), writer=ImageWriter())
 
-    code_font_size = int(height_px * 0.08)
-    code_row_h = int(code_font_size * 1.4)
-    bc_avail_h = bc_h_area - code_row_h - margin
-    bc_avail_w = width_px - 2 * margin
+    code_font_size = int(height_px * 0.075)
+    code_font = _font(code_font_size)
+    code_text = f"SN: {barcode_payload}" if serial_number else str(barcode_payload)
+    code_tw = int(draw.textlength(code_text, font=code_font))
+    text_gap = int(width_px * 0.02)
+
+    bc_avail_h = bc_h_area - int(margin * 1.2)
+    bc_avail_w = width_px - 2 * margin - code_tw - text_gap
 
     bc_img = bc.render({"module_height": 3.0, "font_size": 0, "text_distance": 1,
                         "quiet_zone": 0, "write_text": False})
@@ -563,15 +587,14 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         bc_w_scaled = int(bc_img.width * bc_avail_h / bc_img.height)
     bc_img = bc_img.resize((bc_w_scaled, bc_h_scaled))
 
-    bc_y = text_h
-    bc_x = margin + (bc_avail_w - bc_w_scaled) // 2
+    bc_x = margin
+    bc_y = text_h + (bc_h_area - bc_h_scaled) // 2
     img.paste(bc_img, (bc_x, bc_y))
 
-    # Kód produktu pod čárovým kódem
-    code_font = _font(code_font_size)
-    code_tw = int(draw.textlength(str(code), font=code_font))
-    draw.text((bc_x + (bc_w_scaled - code_tw) // 2, bc_y + bc_h_scaled + int(height_px * 0.01)),
-              str(code), fill="black", font=code_font)
+    # Kód produktu (nebo sériové číslo) vedle čárového kódu, svisle na střed
+    code_text_h = int(code_font_size * 1.15)
+    code_text_y = text_h + (bc_h_area - code_text_h) // 2
+    draw.text((bc_x + bc_w_scaled + text_gap, code_text_y), code_text, fill="black", font=code_font)
 
     # Dolní pásmo – text o dovozci
     max_text_width = width_px - 2 * margin
