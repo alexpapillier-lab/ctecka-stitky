@@ -79,12 +79,15 @@ def print_it(product):
     from label_printer import render_label_image, print_label, default_length
     name = product["name"]
     show_weee = product.get("show_weee")
+    # Scan mód tiskne na 300 DPI kvůli rychlosti (zhruba 2× rychlejší než 600).
+    # Render i tisk musí být na stejném DPI.
     img = render_label_image(
         product["code"], name,
         length_mm=default_length(name),
         show_weee=True if show_weee is None else show_weee,
+        dpi_600=False,
     )
-    return print_label(img)
+    return print_label(img, dpi_600=False)
 
 
 def find_serial_port():

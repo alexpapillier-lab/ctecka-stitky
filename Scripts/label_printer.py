@@ -564,11 +564,18 @@ def find_printer():
     return None
 
 
-def print_label(image, copies=1, printer_identifier=None, rotate="90"):
-    """Vytiskne obrázek štítku na Brother QL-700. Vrací (ok: bool, error: str|None)."""
+def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=None):
+    """Vytiskne obrázek štítku na Brother QL-700. Vrací (ok: bool, error: str|None).
+
+    dpi_600 musí odpovídat DPI, na kterém byl obrázek vyrenderován; None = výchozí
+    (PRINT_DPI_600). 300 DPI tiskne zhruba 2× rychleji než 600 DPI.
+    """
     from brother_ql.conversion import convert
     from brother_ql.raster import BrotherQLRaster
     from brother_ql.backends.helpers import send
+
+    if dpi_600 is None:
+        dpi_600 = PRINT_DPI_600
 
     if printer_identifier is None:
         printer_identifier = find_printer()
@@ -586,9 +593,9 @@ def print_label(image, copies=1, printer_identifier=None, rotate="90"):
             rotate=rotate,
             threshold=70.0,
             dither=True,
-            compress=False,
+            compress=True,      # bezztrátová komprese → rychlejší USB přenos
             red=False,
-            dpi_600=True,
+            dpi_600=dpi_600,    # musí odpovídat DPI obrázku
             hq=True,
             cut=True,
         )
