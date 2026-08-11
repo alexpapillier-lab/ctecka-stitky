@@ -478,16 +478,11 @@ def _calc_min_length_mm(code, name, importer_text, height_px, ppm, min_mm=38, ma
     return max_mm
 
 
-def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True,
-                        serial_number=None):
-    """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape).
-
-    serial_number: pokud je zadáno (AirPods sluchátka/pouzdra, viz needs_serial_number),
-    čárový kód i text pod ním kóduje sériové číslo jednotky místo kódu produktu.
-    """
+def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True):
+    """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape)."""
     if importer_text is None:
         importer_text = classify_importer(name)
-    barcode_payload = serial_number if serial_number else code
+    barcode_payload = code
     if dpi_600 is None:
         dpi_600 = PRINT_DPI_600
 
@@ -580,7 +575,7 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
 
     code_font_size = int(height_px * 0.075)
     code_font = _font(code_font_size)
-    code_text = f"SN: {barcode_payload}" if serial_number else str(barcode_payload)
+    code_text = str(barcode_payload)
     code_tw = int(draw.textlength(code_text, font=code_font))
     text_gap = int(width_px * 0.02)
 
@@ -626,6 +621,63 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     return img
 
 
+def render_serial_label_image(serial_number, length_mm=50, dpi_600=None):
+    """Samostatný štítek jen se sériovým číslem (barcode + text), bez dovozce
+    ani názvu produktu. Tiskne se navíc vedle běžného produktového štítku
+    u AirPods sluchátek/pouzder (viz needs_serial_number)."""
+    if dpi_600 is None:
+        dpi_600 = PRINT_DPI_600
+
+    if dpi_600:
+        height_px = LABEL_HEIGHT_PX_600
+        ppm = PX_PER_MM_600
+    else:
+        height_px = LABEL_HEIGHT_PX
+        ppm = PX_PER_MM
+    width_px = int(length_mm * ppm)
+
+    img = Image.new("RGB", (width_px, height_px), "white")
+    draw = ImageDraw.Draw(img)
+    margin = int(height_px * 0.08)
+
+    import barcode
+    from barcode.writer import ImageWriter
+    bc = barcode.get("code128", str(serial_number), writer=ImageWriter())
+
+    label_font_size = int(height_px * 0.14)
+    label_font = _font(label_font_size, bold=True)
+    label_text = "SN"
+    label_h = int(label_font_size * 1.2)
+    draw.text((margin, margin), label_text, fill="black", font=label_font)
+
+    sn_font_size = int(height_px * 0.16)
+    sn_font = _font(sn_font_size, bold=True)
+    sn_text = str(serial_number)
+    sn_tw = int(draw.textlength(sn_text, font=sn_font))
+    sn_h = int(sn_font_size * 1.2)
+    sn_y = height_px - margin - sn_h
+    draw.text(((width_px - sn_tw) // 2, sn_y), sn_text, fill="black", font=sn_font)
+
+    bc_avail_w = width_px - 2 * margin
+    bc_avail_h = sn_y - (margin + label_h) - int(margin * 0.5)
+
+    bc_img = bc.render({"module_height": 3.0, "font_size": 0, "text_distance": 1,
+                        "quiet_zone": 0, "write_text": False})
+    bc_ratio_w = bc_avail_w / bc_img.width
+    bc_w_scaled = bc_avail_w
+    bc_h_scaled = int(bc_img.height * bc_ratio_w)
+    if bc_h_scaled > bc_avail_h:
+        bc_h_scaled = bc_avail_h
+        bc_w_scaled = int(bc_img.width * bc_avail_h / bc_img.height)
+    bc_img = bc_img.resize((bc_w_scaled, bc_h_scaled))
+
+    bc_x = (width_px - bc_w_scaled) // 2
+    bc_y = margin + label_h + (bc_avail_h - bc_h_scaled) // 2
+    img.paste(bc_img, (bc_x, bc_y))
+
+    return img
+
+
 def find_printer():
     """Najde připojenou Brother QL tiskárnu přes USB. Vrátí identifikátor, nebo None."""
     # Přímé vyhledání přes pyusb (Brother QL-700: VID=0x04f9, PID=0x2042)
@@ -647,11 +699,15 @@ def find_printer():
     return None
 
 
-def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=None):
-    """Vytiskne obrázek štítku na Brother QL-700. Vrací (ok: bool, error: str|None).
+def print_labels(images, copies=1, printer_identifier=None, rotate="90", dpi_600=None):
+    """Vytiskne sadu obrázků (jeden tiskový job) na Brother QL-700, každý
+    'copies'-krát za sebou. Vrací (ok: bool, error: str|None).
 
-    dpi_600 musí odpovídat DPI, na kterém byl obrázek vyrenderován; None = výchozí
-    (PRINT_DPI_600). 300 DPI tiskne zhruba 2× rychleji než 600 DPI.
+    Používá se pro AirPods se sériovým číslem: images = [produktový_štítek,
+    sn_štítek] – vyjedou dva fyzické štítky v jedné dávce.
+
+    dpi_600 musí odpovídat DPI, na kterém byly obrázky vyrenderovány; None =
+    výchozí (PRINT_DPI_600). 300 DPI tiskne zhruba 2× rychleji než 600 DPI.
     """
     from brother_ql.conversion import convert
     from brother_ql.raster import BrotherQLRaster
@@ -668,17 +724,22 @@ def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=N
     qlr = BrotherQLRaster(PRINTER_MODEL)
     qlr.exception_on_warning = False
 
+    copies = max(1, int(copies))
+    all_images = []
+    for _ in range(copies):
+        all_images.extend(images)
+
     try:
         instructions = convert(
             qlr=qlr,
-            images=[image] * max(1, int(copies)),
+            images=all_images,
             label=LABEL_SIZE_CODE,
             rotate=rotate,
             threshold=70.0,
             dither=True,
             compress=True,      # bezztrátová komprese → rychlejší USB přenos
             red=False,
-            dpi_600=dpi_600,    # musí odpovídat DPI obrázku
+            dpi_600=dpi_600,    # musí odpovídat DPI obrázků
             hq=True,
             cut=True,
         )
@@ -687,3 +748,10 @@ def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=N
         return True, None
     except Exception as e:
         return False, str(e)
+
+
+def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=None):
+    """Vytiskne jeden obrázek štítku 'copies'-krát. Tenký wrapper nad print_labels
+    pro zpětnou kompatibilitu (scan_print.py apod.)."""
+    return print_labels([image], copies=copies, printer_identifier=printer_identifier,
+                         rotate=rotate, dpi_600=dpi_600)
