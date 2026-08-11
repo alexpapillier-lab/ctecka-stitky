@@ -3,16 +3,27 @@
 
 import os
 import re
+import unicodedata
 from PIL import Image, ImageDraw, ImageFont
 
 PRINTER_MODEL = "QL-700"
+
+
+def _norm(name):
+    """Normalizuje na NFC (skládaná diakritika) a lowercase. Nutné, protože
+    Swift/macOS řetězce (název produktu předaný appkou) často přicházejí
+    v NFD (rozložená diakritika – "í" jako 'i' + samostatná čárka), zatímco
+    porovnávané literály v tomhle souboru jsou NFC. Bez normalizace substring
+    testy typu "originální" in name tiše selžou, i když text vypadá stejně."""
+    return unicodedata.normalize("NFC", name or "").lower()
+
 
 _DISPLAY_KEYWORDS = ["displej", "display", "lcd", "oled", "screen"]
 _DISPLAY_EXCLUDE  = ["pod displej", "pod display", "těsnění", "lepidlo", "sklíčko", "kabel k", "rámeček"]
 
 def is_display(name):
     """Vrátí True pokud jde o displej (→ 125mm štítek)."""
-    t = (name or "").lower()
+    t = _norm(name)
     if any(ex in t for ex in _DISPLAY_EXCLUDE):
         return False
     return any(kw in t for kw in _DISPLAY_KEYWORDS)
@@ -21,7 +32,7 @@ def needs_serial_number(name):
     """AirPods sluchátka/nabíjecí pouzdra se trackují podle sériového čísla
     jednotky (párování/záruka) – vyžadují ruční vepsání SN před tiskem.
     Nechytá baterie do nich (Ampsentrix/Baterie …), špunty ani příslušenství."""
-    n = (name or "").lower().strip()
+    n = _norm(name).strip()
     if "airpod" not in n:
         return False
     if not n.startswith("náhradní"):
@@ -77,7 +88,7 @@ def classify_importer(name):
     iSwap.cz (ostatní originální díly + nářadí a spotřební materiál) >
     výchozí MobileSentrix.
     """
-    n = (name or "").lower()
+    n = _norm(name)
 
     if "dyson" in n:
         return DYSON_IMPORTER_TEXT
