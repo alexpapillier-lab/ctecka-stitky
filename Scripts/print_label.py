@@ -1,18 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Tisk štítku. Argumenty: code name length_mm [copies] [dpi600] [weee] [serial]"""
-import sys, os, datetime
+import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from label_printer import render_label_image, print_label, classify_importer
-
-# DOČASNÝ DEBUG LOG – smazat po vyřešení dovozce v appce.
-try:
-    with open(os.path.expanduser("~/Desktop/CteckaStitkySW/debug_log.txt"), "a", encoding="utf-8") as f:
-        f.write(f"{datetime.datetime.now()}  PRINT argv={sys.argv!r}\n")
-        if len(sys.argv) > 2:
-            f.write(f"    classify_importer(name)[:40] = {classify_importer(sys.argv[2])[:40]!r}\n")
-except Exception:
-    pass
+from label_printer import render_label_image, print_label
 
 code      = sys.argv[1]
 name      = sys.argv[2]
