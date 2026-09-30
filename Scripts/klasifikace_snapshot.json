@@ -1,0 +1,7397 @@
+{
+ "1097/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1097/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "11PRFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "11PRFB2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "12111": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1280/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1280/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1283/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1283/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1286/BIL": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1286/CER": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1292/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1292/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "12MRFB2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "12PMRFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "12RFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1310/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1310/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1319/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1319/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1322/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1322/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1325/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1325/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1334/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1334/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1340/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1340/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1346/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1346/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1352/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1352/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13558666": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1358/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1358/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13621175": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621179": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621180": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621183": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621184": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621185": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13621194": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13622662": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13622665": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13632740": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13632747": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13632750": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "13632752": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1370/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1370/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13745764": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1379/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1379/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1385/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1385/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13MRFB3": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13PMRFB2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13PRFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "13RFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "14337949": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "14PMRFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "14PRFB2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "14RFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1523/1MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1523/2MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15413661": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1562": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15629397": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1564": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1565": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1566": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1567": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1568": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1569": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1570": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1571": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15727205": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15728655": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15728837": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "15RFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1613BL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1613GD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1613RG": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1613SV": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16495746": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1652/BIL": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1652/CER": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1664/10M": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1664/1MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1664/2MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1664/3MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1664/5MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1670": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16738272": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16745652": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16745721": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16747789": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "16829043": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/10M": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/12M": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/25M": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/50M": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/5MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1688/8MM": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1694/B": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1694/ERN": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/BIL": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/BIL2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/BIL3": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/CER": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/CER2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "1697/CER3": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "16ERFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "17023875": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "17023901": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1704": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1705": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1724": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "17402351": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1742": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1743": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1744": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/CER2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/FIA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1757/ZLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1760/PUL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1760/STR": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1760/VES": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1760/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1788": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1790/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1790/HNE": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1790/SED": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/CER2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/FIA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1835/ZLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1841": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1847": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1853": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1854": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19050946": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1927": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "1928": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19346122": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19346125": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19346140": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19346141": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19346148": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19643119": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19807077": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19807079": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19807080": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19807082": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19807083": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19828231": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19833215": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19833231": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19833276": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19833340": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19868204": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19868216": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19868283": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19891096": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19904436": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19904689": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19904717": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19927294": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19927399": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19927525": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19930656": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19933694": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19933695": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "19967148": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20046748": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20046754": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20047155": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20065040": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20151715": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340055": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340148": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340153": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340156": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340166": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340212": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340214": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20340215": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2039": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2040": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "20403323": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20403329": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20403332": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20403340": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20403355": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2051": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2057": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2063/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2063/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2063/CER2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2063/KOR": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2063/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20630567": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2066/BEZ": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2066/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2066/SED": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2069426": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20711741": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2080": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2081": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20929787": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "20932221": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21135240": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21135257": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21292947": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21299403": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21483434": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21522272": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21544925": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21556478": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21584967": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21605051": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21605060": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21605062": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21605778": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21700496": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21828857": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21828879": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21828969": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21828988": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21829055": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21884163": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "21949304": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22034946": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22095267": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22095350": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22119230": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22121652": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22359101": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22367784": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22367785": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22368988": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22369007": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22416442": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22423333": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22423654": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22445823": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22446057": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22456189": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2246": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2247": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22479914": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2248": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22492746": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22492758": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22595814": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22606993": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22606994": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22606995": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22606996": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22645419": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22738859": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2274888": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748922": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748924": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748926": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748927": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748928": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748931": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748933": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748936": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748937": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748938": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748939": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748940": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748941": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748942": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748943": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748944": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748945": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748946": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748948": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748949": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748951": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748952": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748953": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748954": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748955": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748956": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748957": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748959": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748960": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748961": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748962": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748964": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748965": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748966": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22748967": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748968": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748969": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748970": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748971": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748972": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748973": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748975": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748976": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748977": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748979": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748980": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748984": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748985": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748986": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748987": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748990": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748991": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748992": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748995": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22748996": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749003": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749004": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749006": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749007": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749008": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749009": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749010": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749011": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749012": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749013": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749014": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749016": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749021": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749022": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749023": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22749024": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749025": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749026": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749027": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749028": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749029": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749030": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749031": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749032": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "22749035": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "22749036": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2334": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2335": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2336": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2337": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2338": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2339": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2340": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2421": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2429": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2430": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2431": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/VES": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ZLA2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ZLA3": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ZLA4": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2456/ZLA6": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "24567": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/ERV": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/FIA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/LUT": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2504/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA10": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA11": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA14": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA16": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA21": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA22": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA25": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA26": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA3": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA4": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA5": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2525/SPA6": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "25256": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2567": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2568": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2569": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2570": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2571": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2572": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2573": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2574": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2578": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2579": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2580": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2581": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2583": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2584": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2585": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2586": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2648/ERN2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2648/ERN6": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2648/ERN7": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2648/ERN8": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2648/ERN9": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2649": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2705/B": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2705/ERN": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2714/ERN10": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2714/ERN2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2714/ERN3": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2714/ERN4": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2714/ERN5": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2762/BIL": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2762/BIL2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2762/CER": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2762/CER2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2774": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/VES": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/ZLA10": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/ZLA2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2774/ZLA5": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "27740": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "27744": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2774E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2779": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2936": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2936/B2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2936/ERN": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2936/ERN2": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "2936/ERN3": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2936/ERN4": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2936/ERN7": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2936/ERN8": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "29361": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2937": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2942": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2972": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2977": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "2978": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3023/B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3023/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3023/ERV": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3023/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3023/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3026/B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3026/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3026/ERV": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3026/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3026/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/GRA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/STR": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/TIC": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA12": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA4": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA5": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA7": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA8": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3032/ZLA9": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3088": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3089": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3090": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3091": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3092": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3093": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3127": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3137": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3138": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3139": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3140": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181/0.10": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181/0.14": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181/0.19": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181/0.20": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181/0.8": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "31810": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181008": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "318101": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "318103": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "318105": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "318108": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "31811": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "318111": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "318115": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "318116": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "318117": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "31812": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "318128": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "31813": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "31814": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3181E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181E2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3181L10": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3181L3": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L4": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L5": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L6": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L7": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L8": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3181L9": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3182": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3182E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3183E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "31846": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3184E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3185": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3185E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3187": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3189": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3189E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3190": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3190E": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3190E2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3195": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3197": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3268": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3275": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3276": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3277": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3319": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3320": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3321": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3322": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3323": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3385": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3432": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3433": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3465": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3466": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3502": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3505": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3506": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3507": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3509": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3513": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3514": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3515": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3516": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3631": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3766": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3766/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3767": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "3778": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3784": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3790": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3793": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853/BIL2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853/CER2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853/CER5": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "38531": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "38532": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "38534": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "38535": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3853H": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3854": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3855": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3856": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3861": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "3925": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "4005": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4065": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4191ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4194ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4224ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4225CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4371": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4372": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4518ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4518SED": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "45872": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "4653": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4654": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "4713": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4719": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4746": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4767": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4809BK": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4809G": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4809S": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4812B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4812G": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4812S": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4967B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4967G": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4967RG": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4967RG2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "4967S": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4976": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "4979": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5070/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5070/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5088/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5100/ALP": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5100/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5100/GOL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5100/SIE": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5101": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5102": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5199/PAM4": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5199/PAM5": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "5199/PAM6": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5199/PAM7": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5364/ALP": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5364/GOL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5364/GRA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5364/SIE": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5385": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5388": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5391": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5394": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5397": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5400": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5403": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5406": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5409": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5412": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5415": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5418": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5421": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5424": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5427": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5430": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5468/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5480": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5480/7": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5480/XR": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5561/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5564/MID": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5564/STA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5643/BLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5643/NAT": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5652": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5653": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5654": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5655": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5656": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5745": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5745/MID": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5745/STA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5745/STA3": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5746": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5747": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5748": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5799/DEE": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5799/GOL2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5799/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5799/SPA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5814/BLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5814/BLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5814/NAT": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5814/WHI": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5882/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5882/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5882/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5885/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5885/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5885/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5888/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5888/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5888/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5891/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5891/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5891/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5894/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5894/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5894/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5897/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5897/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5897/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5900/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5900/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5900/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5903/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5903/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5903/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5906/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5906/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5906/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5909/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5909/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5909/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5912/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5912/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5912/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5915/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5915/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5915/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "5984/BLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "5984/NAT": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6014": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6014/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6014/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6032": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6032/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6032/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6059": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6062/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6062/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6062/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6065/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6065/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6065/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6068/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6068/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6068/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6110/100": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6110/150": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6110/200": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6110/500": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6113/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6113/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6116/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6116/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6119/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6119/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6122": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6125/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6125/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6128/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6128/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6131/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6131/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6134/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6134/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6137/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6137/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6140/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6140/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6143/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6143/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6146/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6146/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6152/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6152/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6155/GRA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6155/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6155/STA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6158/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6158/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6164/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6164/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6167/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6167/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6170/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6170/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6173/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6173/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6176/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6176/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6179/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6179/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6182/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6182/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6185/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6185/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6188/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6188/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6191/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6191/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6194/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6194/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6197/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6197/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6200/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6200/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6203/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6203/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6206/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6206/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6209/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6209/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6212/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6212/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6215/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6215/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6218/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6218/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6221/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6221/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6224/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6224/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6227/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6227/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6230/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6230/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6233/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6233/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6236/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6236/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6239/10K": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6239/1KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6242/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6242/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6245/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6245/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6254/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6254/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6254/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6257/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6257/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6257/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6260/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6260/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6260/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6287/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6287/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6287/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6290/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6290/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6290/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6293": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6293/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6293/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6293/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6320/ALP": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6320/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6320/CER2": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6320/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6320/RUZ": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6320/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6323/BIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6323/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6323/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6323/R": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6323/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6326/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6326/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6326/R": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6326/ZEL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6326/ZLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/FIA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/STR": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6329/ZLU": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6332/ALP": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6332/GRA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6332/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6332/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6332/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6335/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6335/FIA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6335/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6335/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6338/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6338/MOD": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6338/SED": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6338/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6341/ED": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6341/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6341/ST": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6341/ZLA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6353/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6353/TRA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6449": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6449/CER": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6527": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6533": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6545/ERN": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6566/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6566/SPA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6569/BLA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6569/BLU": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6569/NAT": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6569/WHI": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6572/CER": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6572/MOD": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6572/RUZ": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6572/ZEL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6572/ZLU": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6578/B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6578/C": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6578/ROZ": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6581/B": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6581/C": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6581/ROZ": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6593/DEE": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6593/GOL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6593/SIL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6593/SPA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6596/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6596/SPA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6605/BLA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6605/BLU": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6605/NAT": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6605/WHI": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6620/BLA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6620/DES": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6620/NAT": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6620/WHI": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6623/ALP": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6623/GOL2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6623/GRA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6623/SIE": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6623/SIL2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6626/ALP": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6626/GOL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6626/GRA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6626/SIE": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6626/SIL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6629/DEE": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6629/GOL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6629/SIL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6629/SPA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6635": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6677/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6677/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6677/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6680/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6680/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6680/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6683/B": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6683/C": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6683/ROZ": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": true
+ },
+ "6686": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6692/4KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6692/6KS": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6695/MID": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6695/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6695/SPA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6695/STA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6698/SIL": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6698/SPA": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "6704": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6707/BLA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6707/DES": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6707/NAT": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6707/WHI": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6710/BLA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6710/PIN": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6710/TEA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6710/ULT": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6710/WHI": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6716": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6731": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6746": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6774": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6858": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6903": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6965/BIL": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6965/CER": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6968/BLU": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6968/ORA": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6968/WHI2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "6992": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "7000": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71000": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71011": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71012": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71013": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71016": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71017": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71018": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71019": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71020": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71021": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71022": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71023": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71024": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71025": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71026": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71027": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71028": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71030": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71031": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71032": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71033": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71034": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71035": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71036": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71037": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71038": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71039": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71040": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71041": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71042": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71043": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71044": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71045": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71046": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71047": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71048": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71049": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71050": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71052": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71053": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71054": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71055": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71056": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71057": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71058": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71059": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71060": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71061": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71062": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71063": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71064": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71065": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71066": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71067": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71068": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71069": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71070": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71071": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71072": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71073": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71074": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71075": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71076": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71077": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71078": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71079": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71080": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "71081": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "749/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "749/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8000": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8100": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8103": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8104": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8105": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8106": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8108": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8110": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8111": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8119": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8120": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8121": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8122": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8123": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8124": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8127": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8133": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8134": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8135": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8136": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8137": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8138": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8139": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8140": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8141": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8142": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8149": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8150": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8153": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8154": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8160": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8161": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8163": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8164": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8165": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8166": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8167": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8168": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8169": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8170": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8171": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8172": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8173": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8174": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8175": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8176": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8177": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8178": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8179": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8180": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8181": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8182": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8208": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8219": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8220": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8221": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8222": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8223": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8224": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8225": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8226": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8227": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8229": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8232": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8233": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8234": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8235": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8236": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8237": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8238": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8239": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8242": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8243": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8244": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8245": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8246": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8247": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8248": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8249": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8250": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8251": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8252": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8253": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8254": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8257": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8258": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8259": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8260": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8261": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8262": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8263": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8266": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8270": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8273": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8274": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8275": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8276": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8281": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8282": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8283": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8285": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8286": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8287": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8288": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8289": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8290": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8291": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8292": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8294": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8295": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8296": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8298": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8299": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8300": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8304": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8305": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8306": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8307": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8308": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8309": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8310": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8311": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8312": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8313": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8314": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8315": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8316": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8317": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8318": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8320": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8322": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8323": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8324": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8325": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8326": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8329": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8330": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8331": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8332": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8336": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8337": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8338": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8339": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8340": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8341": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8342": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8343": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8344": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8345": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8346": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8347": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8348": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8349": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8350": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8351": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8352": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8357": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8358": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8359": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8360": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8361": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8362": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8363": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8364": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8365": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8366": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8367": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8368": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8369": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8370": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8371": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8373": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8378": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8379": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8380": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8381": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8382": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8383": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8384": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8387": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8389": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8397": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8398": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8399": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8400": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8401": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8402": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8403": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8404": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8405": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8406": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8407": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8408": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8409": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8410": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8412": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8413": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8414": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8415": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8416": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8420": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8421": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8423": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8424": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8425": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8427": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8428": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8429": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8430": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8431": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8432": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8433": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8434": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8435": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8436": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8437": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8438": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8439": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8440": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8441": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8442": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8443": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8444": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8445": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8446": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8447": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8448": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8449": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8450": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8451": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8452": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8454": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8456": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8457": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8458": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8459": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8460": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8461": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8462": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8463": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8465": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8466": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8467": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8468": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8469": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8470": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8471": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8472": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8473": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8474": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8475": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8476": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8477": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8478": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8479": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8481": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8482": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8483": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8484": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8485": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8486": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8487": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8488": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8489": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8490": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8491": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8492": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8493": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8494": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8495": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8496": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8497": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8498": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8499": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8500": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8501": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8502": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8503": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8504": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8505": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8506": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8507": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8508": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8509": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8510": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8511": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8512": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8513": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8514": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8515": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8516": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8517": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8518": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8519": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8520": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8521": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8522": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8524": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8525": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8526": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8527": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8528": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8529": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8530": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8532": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8533": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8534": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8535": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8536": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8537": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8538": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8539": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8540": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8541": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8542": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8543": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8544": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8545": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8546": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8547": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8548": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8549": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8550": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8551": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8552": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8553": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8554": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8555": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8556": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8557": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8558": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8559": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8560": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8561": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8562": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8563": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8564": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8565": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8566": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8567": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8568": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8569": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8570": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8571": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8572": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8573": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8574": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8575": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8576": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8577": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8578": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8579": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8580": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8582": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8583": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8584": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8585": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8586": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8587": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8589": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8590": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8591": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8592": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8593": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8594": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8595": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8596": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8597": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8598": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8599": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8600": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8601": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8602": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8603": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8604": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8605": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8606": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8607": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8608": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8609": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8610": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8611": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8614": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8615": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8616": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8617": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8618": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8619": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8620": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8621": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8622": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8623": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8624": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8625": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8626": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8627": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8628": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8629": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8630": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8631": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8632": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8633": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8634": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8635": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8636": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8637": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8638": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "8639": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "8640": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "869/10K": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "869/1KS": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9000": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9001": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9002": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9003": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9004": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9005": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9006": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9007": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9008": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9009": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9010": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9011": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9012": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9013": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9014": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9015": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9016": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9017": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9018": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9019": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9020": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9021": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9022": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "9023": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9024": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9025": {
+  "dovozce": "apple",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9026": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "AW138": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "AW142": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "AW342": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "AW444": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "IMINI1": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "IMINI2": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "IMINI3": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "IMINI4": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "IMINI5": {
+  "dovozce": "iswap",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "XSMRFB": {
+  "dovozce": "iswap",
+  "je_displej": true,
+  "potrebuje_sn": false
+ }
+}
