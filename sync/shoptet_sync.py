@@ -3,30 +3,37 @@
 """
 Denní synchronizace Shoptet ↔ Supabase (štítkovačka).
 
+Zdroj pravdy pro sortiment a názvy je Shoptet, zdroj pravdy pro EAN je
+databáze štítkovačky (protože EAN je na už vytištěných štítcích).
+
 Co dělá při každém běhu:
 1. stáhne export produktů ze Shoptetu (env SHOPTET_EXPORT_URL – kompletní XML
-   productsComplete.xml s EAN i PART_NUMBER; umí i XLSX ze šablony)
-2. NOVÉ produkty (code není v DB) vloží: name, part_number, ean
-   – EAN ze Shoptetu se převezme, je-li platný a neobsazený; jinak se
-     vygeneruje EAN-13 s prefixem 859 (Shoptet u nových produktů EAN buď nemá,
-     nebo ho zdědil z kopírovaného produktu)
+   productsComplete.xml s EAN, PART_NUMBER a parametry variant; umí i XLSX)
+2. NOVÉ produkty (code není v DB) vloží: name, part_number, ean, dovozce,
+   je_displej, potrebuje_sn (klasifikace = stejný kód jako na štítkovačce,
+   Scripts/label_printer.py). EAN ze Shoptetu se převezme, je-li platný
+   a neobsazený; jinak se vygeneruje EAN-13 s prefixem 859.
 3. EXISTUJÍCÍ produkty srovná:
-   – Shoptet má platný unikátní EAN a DB má náš vygenerovaný (859…) →
-     DB převezme ten ze Shoptetu (je to skutečný čárový kód na zboží).
-     Vyžaduje SUPABASE_SERVICE_KEY (anon klíč nesmí měnit ean – zámek RLS);
-     bez něj se jen vypíše "k rozhodnutí".
-   – Shoptet nemá EAN, nebo má duplicitní → do XLSX k importu (Shoptet
-     dostane EAN z DB)
-   – DB nemá part_number a Shoptet ho má → doplní (jen se service klíčem)
+   – název: varianta = název produktu + hodnota parametru varianty
+     ("Zadní sklo – Černá | iPhone 13"); liší-li se od DB → přepíše DB
+   – part_number: DB nemá, Shoptet má → doplní
+   – EAN: Shoptet má skutečný unikátní EAN a DB náš vygenerovaný (859…) →
+     DB převezme ten ze Shoptetu; Shoptet nemá / má duplicitní → XLSX k importu
+   – produkt zmizel ze Shoptetu → aktivni=false (nic se nemaže); vrátil se →
+     aktivni=true. Vyžaduje sloupec products.aktivni (viz SQL v README).
+   Zápisy do DB kromě INSERT vyžadují SUPABASE_SERVICE_KEY (anon má zámek RLS).
 4. XLSX (code, pairCode, ean) = vše, co je potřeba naimportovat do Shoptetu
 5. mail (SMTP_* + MAIL_TO), pokud je co hlásit; bez SMTP jen uloží soubor
 
 Lokálně: --nanecisto (nic nezapisuje, neposílá); --test-mail (jen zkušební mail)
 """
-import io, os, re, sys, json, random, smtplib, ssl, urllib.request, urllib.parse
+import io, os, re, sys, json, random, smtplib, ssl, unicodedata, urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
 from email.message import EmailMessage
 from datetime import date
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Scripts"))
+from label_printer import importer_key_for, is_display, needs_serial_number  # noqa: E402
 
 SUPABASE = "https://osinlzagjimyrzjpdxai.supabase.co/rest/v1/products"
 ANON_KEY = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwi"
@@ -36,22 +43,38 @@ KEY = SERVICE_KEY or ANON_KEY
 H = {"apikey": KEY, "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 
 NANECISTO = "--nanecisto" in sys.argv
+MAX_V_MAILU = 40      # delší seznamy se v mailu zkrátí (celé jsou v logu Actions)
 
 
 def log(msg):
     print(msg, flush=True)
 
 
+def nfc(s):
+    return unicodedata.normalize("NFC", (s or "").strip())
+
+
 # ── Supabase ─────────────────────────────────────────────────────────────
+MA_AKTIVNI = True     # sloupec products.aktivni existuje? (zjistí db_all)
+
+
 def db_all():
-    out, off = [], 0
-    while True:
-        req = urllib.request.Request(f"{SUPABASE}?select=code,ean,name,pair_code,part_number&limit=1000&offset={off}", headers=H)
-        b = json.loads(urllib.request.urlopen(req, timeout=30).read())
-        out += b
-        if len(b) < 1000:
-            return out
-        off += 1000
+    global MA_AKTIVNI
+    for sloupce in ("code,ean,name,pair_code,part_number,dovozce,aktivni", "code,ean,name,pair_code,part_number,dovozce"):
+        out, off = [], 0
+        try:
+            while True:
+                req = urllib.request.Request(f"{SUPABASE}?select={sloupce}&limit=1000&offset={off}", headers=H)
+                b = json.loads(urllib.request.urlopen(req, timeout=30).read())
+                out += b
+                if len(b) < 1000:
+                    return out
+                off += 1000
+        except urllib.error.HTTPError as e:
+            if e.code == 400 and "aktivni" in sloupce:
+                MA_AKTIVNI = False
+                continue
+            raise
 
 
 def db_insert(rec):
@@ -79,10 +102,23 @@ def clean(v):
     return s
 
 
+def nazev_varianty(zaklad, hodnota):
+    """'Zadní sklo | iPhone 13' + 'Černá' → 'Zadní sklo – Černá | iPhone 13'.
+    Hodnota parametru (barva, šířka, stav, počet kusů…) patří k dílu, ne
+    k zařízení za '|' – štítkovačka dělí název na popis | zařízení."""
+    zaklad, hodnota = nfc(zaklad), nfc(hodnota)
+    if not hodnota:
+        return zaklad
+    if "|" in zaklad:
+        popis, zarizeni = [p.strip() for p in zaklad.split("|", 1)]
+        return f"{popis} – {hodnota} | {zarizeni}"
+    return f"{zaklad} – {hodnota}"
+
+
 def _xml_rows(raw):
     """Kompletní XML: prodejní jednotka = SHOPITEM bez variant, nebo každá VARIANT.
-    Varianta dědí NAME a PART_NUMBER. XML nemá PAIR_CODE (interní párování je jen
-    v CSV/XLSX), import EANu do Shoptetu ale páruje podle code, takže nevadí."""
+    Varianta dědí PART_NUMBER a název doplněný o hodnotu svého parametru.
+    XML nemá PAIR_CODE (import EANu do Shoptetu páruje podle code, nevadí)."""
     root = ET.fromstring(raw)
 
     def t(e, tag):
@@ -96,10 +132,11 @@ def _xml_rows(raw):
         variants = it.findall("./VARIANTS/VARIANT")
         if variants:
             for v in variants:
-                rows.append({"code": t(v, "CODE"), "pairCode": "", "name": name,
+                hodnoty = [t(p, "VALUE") for p in v.findall(".//PARAMETER")]
+                rows.append({"code": t(v, "CODE"), "pairCode": "", "name": nazev_varianty(name, " ".join(h for h in hodnoty if h)),
                              "ean": t(v, "EAN"), "partNumber": t(v, "PART_NUMBER") or pn_item})
         else:
-            rows.append({"code": t(it, "CODE"), "pairCode": "", "name": name,
+            rows.append({"code": t(it, "CODE"), "pairCode": "", "name": nfc(name),
                          "ean": t(it, "EAN"), "partNumber": pn_item})
     return rows, True, True
 
@@ -115,7 +152,7 @@ def _excel_rows(raw):
     rows = []
     for _, r in df.iterrows():
         rows.append({"code": clean(r.get("code")) or "", "pairCode": clean(r.get("pairCode")) or "",
-                     "name": clean(r.get("name")) or "", "ean": (clean(r.get("ean")) or "") if ma_ean else "",
+                     "name": nfc(clean(r.get("name"))), "ean": (clean(r.get("ean")) or "") if ma_ean else "",
                      "partNumber": (clean(r.get("partNumber")) or clean(r.get("externalCode")) or "") if ma_pn else ""})
     return rows, ma_ean, ma_pn
 
@@ -198,6 +235,19 @@ def radek(r, poznamka=""):
     return f"  {r['code']:<12} {r['ean']:<14} {poznamka:<28} {r['name'][:55]}"
 
 
+def sekce(nadpis, radky):
+    """Blok do mailu; dlouhé seznamy zkrátí (celý seznam je v logu Actions)."""
+    if not radky:
+        return ""
+    text = f"{nadpis} ({len(radky)}):\n" + "\n".join(radky[:MAX_V_MAILU])
+    if len(radky) > MAX_V_MAILU:
+        text += f"\n  … a dalších {len(radky) - MAX_V_MAILU} (celý seznam v logu GitHub Actions)"
+    return text + "\n\n"
+
+
+DOVOZCE_NAZEV = {"apple": "Apple", "iswap": "iSwap.cz", "dyson": "Dyson", "mobilesentrix": "MobileSentrix"}
+
+
 # ── Hlavní běh ────────────────────────────────────────────────────────────
 def main():
     if "--test-mail" in sys.argv:
@@ -215,9 +265,11 @@ def main():
     db = db_all()
     dbc = {p["code"]: p for p in db}
     obsazene = {p["ean"] for p in db if p.get("ean")}
-    log(f"databáze: {len(dbc)} produktů")
+    v_shoptetu = {r["code"] for r in export}
+    log(f"databáze: {len(dbc)} produktů" + ("" if MA_AKTIVNI else " (sloupec aktivni chybí – vyřazené se nehlídají)"))
 
-    nove, prevzate, doplneny_pn, k_importu, k_rozhodnuti = [], [], [], [], []
+    nove, prevzate, doplneny_pn, prejmenovane, vyrazene, vracene, k_importu, k_rozhodnuti = [], [], [], [], [], [], [], []
+    bez_klice = 0    # změny, které by se udělaly, kdyby byl service klíč
 
     # ── 1) nové produkty ─────────────────────────────────────────────
     for r in export:
@@ -229,7 +281,10 @@ def main():
             log(f"  {r['code']}: EAN {e} ze Shoptetu je obsazený/neplatný – generuji nový")
         ean = e if ze_shoptetu else ean13_859(obsazene)
         obsazene.add(ean)
-        rec = {"code": r["code"], "name": clean(r["name"]) or r["code"], "ean": ean}
+        name = r["name"] or r["code"]
+        rec = {"code": r["code"], "name": name, "ean": ean,
+               "dovozce": importer_key_for(name), "je_displej": is_display(name),
+               "potrebuje_sn": needs_serial_number(name)}
         pc = clean(r.get("pairCode"))
         if pc:
             rec["pair_code"] = pc
@@ -237,67 +292,99 @@ def main():
         if pn:
             rec["part_number"] = pn
         nove.append((rec, ze_shoptetu))
-        log(f"  + nový {rec['code']:<12} ean={ean} {'(shoptet)' if ze_shoptetu else '(nový)'} pn={rec.get('part_number', '-')} {rec['name'][:45]}")
+        log(f"  + nový {rec['code']:<12} ean={ean} {'(shoptet)' if ze_shoptetu else '(nový)'} "
+            f"dovozce={rec['dovozce']} pn={rec.get('part_number', '-')} {name[:45]}")
         if not ze_shoptetu:
             k_importu.append((rec, "nový produkt"))
 
-    # ── 2) existující produkty: srovnání EAN a part_number ───────────
-    if ma_ean:
-        for r in export:
-            d = dbc.get(r["code"])
-            if not d:
-                continue
+    # ── 2) existující produkty ────────────────────────────────────────
+    for r in export:
+        d = dbc.get(r["code"])
+        if not d:
+            continue
+        # název
+        if r["name"] and nfc(d.get("name")) != r["name"]:
+            if SERVICE_KEY:
+                prejmenovane.append((d, d.get("name") or "", r["name"]))
+            else:
+                bez_klice += 1
+        # part_number
+        pn = part_number(r.get("partNumber")) if ma_pn else None
+        if pn and not d.get("part_number"):
+            if SERVICE_KEY:
+                doplneny_pn.append((d, pn))
+            else:
+                bez_klice += 1
+        # aktivita
+        if MA_AKTIVNI and d.get("aktivni") is False:
+            (vracene if SERVICE_KEY else k_rozhodnuti).append((d, "je zpět v Shoptetu, v DB neaktivní"))
+        # EAN
+        if ma_ean:
             se, de = clean(r.get("ean")), d.get("ean") or ""
             if se == de:
                 pass
             elif not se:
                 k_importu.append((d, "v Shoptetu chybí EAN"))
             elif platny_ean(se) and se not in obsazene and de.startswith("859"):
-                # Shoptet má skutečný EAN, DB jen náš placeholder → převzít do DB
                 if SERVICE_KEY:
-                    prevzate.append((d, se))
-                    obsazene.discard(de); obsazene.add(se)
+                    prevzate.append((d, se)); obsazene.discard(de); obsazene.add(se)
                 else:
-                    k_rozhodnuti.append((d, se))
+                    k_rozhodnuti.append((d, f"Shoptet má skutečný EAN {se}, DB {de}"))
             else:
                 k_importu.append((d, f"v Shoptetu jiný EAN ({se})"))
-    if ma_pn and SERVICE_KEY:
-        for r in export:
-            d = dbc.get(r["code"])
-            pn = part_number(r.get("partNumber")) if d else None
-            if d and pn and not d.get("part_number"):
-                doplneny_pn.append((d, pn))
 
-    log(f"nových: {len(nove)} | EAN převzít ze Shoptetu do DB: {len(prevzate)}"
-        + (f" (k rozhodnutí bez service klíče: {len(k_rozhodnuti)})" if k_rozhodnuti else "")
-        + f" | doplnit part_number: {len(doplneny_pn)} | k importu do Shoptetu: {len(k_importu)}")
+    # ── 3) produkty, které ze Shoptetu zmizely ────────────────────────
+    if MA_AKTIVNI:
+        for p in db:
+            if p["code"] not in v_shoptetu and p.get("aktivni") is not False:
+                (vyrazene if SERVICE_KEY else k_rozhodnuti).append((p, "už není v Shoptetu"))
 
-    if not (nove or prevzate or doplneny_pn or k_importu or k_rozhodnuti):
+    log(f"nových: {len(nove)} | přejmenovat: {len(prejmenovane)} | doplnit part_number: {len(doplneny_pn)}"
+        f" | EAN převzít: {len(prevzate)} | vyřadit: {len(vyrazene)} | vrátit: {len(vracene)}"
+        f" | k importu do Shoptetu: {len(k_importu)} | k rozhodnutí: {len(k_rozhodnuti)}"
+        + (f" | bez service klíče nelze: {bez_klice}" if bez_klice else ""))
+
+    for d, stary, novy in prejmenovane: log(f"  ~ název {d['code']:<12} {stary[:50]!r} → {novy[:50]!r}")
+    for d, pn in doplneny_pn: log(f"  ~ PN    {d['code']:<12} → {pn}")
+    for d, se in prevzate: log(f"  ~ EAN   {d['code']:<12} {d['ean']} → {se}")
+    for d, _ in vyrazene: log(f"  ~ vyřazen {d['code']:<10} {d['name'][:50]}")
+    for d, _ in vracene: log(f"  ~ vrácen  {d['code']:<10} {d['name'][:50]}")
+    for d, proc in k_importu: log(f"  → import {d['code']:<12} {d['ean']}  ({proc})")
+    for d, proc in k_rozhodnuti: log(f"  ? {d['code']:<12} {proc}")
+
+    if not (nove or prevzate or doplneny_pn or prejmenovane or vyrazene or vracene or k_importu or k_rozhodnuti):
         log("vše je sjednocené – nic k odeslání")
         return
     if NANECISTO:
-        for d, se in prevzate: log(f"  ~ EAN {d['code']}: {d['ean']} → {se}")
-        for d, pn in doplneny_pn: log(f"  ~ PN  {d['code']}: → {pn}")
-        for d, proc in k_importu: log(f"  → import {d['code']:<12} {d['ean']}  ({proc})")
-        for d, se in k_rozhodnuti: log(f"  ? {d['code']}: Shoptet {se} vs DB {d['ean']}")
         log("NANEČISTO – nic nezapisuji, neposílám")
         return
 
-    # ── 3) zápisy ─────────────────────────────────────────────────────
+    # ── 4) zápisy ─────────────────────────────────────────────────────
     chyby = []
+
+    def zapis(popis, fn):
+        try:
+            fn()
+        except Exception as ex:
+            chyby.append(f"{popis}: {ex}")
+
     for rec, _ in nove:
-        try: db_insert(rec)
-        except Exception as ex: chyby.append(f"vložení {rec['code']}: {ex}")
-    for d, se in prevzate:
-        try: db_update(d["code"], {"ean": se}); d["ean_puvodni"], d["ean"] = d["ean"], se
-        except Exception as ex: chyby.append(f"EAN {d['code']}: {ex}")
+        zapis(f"vložení {rec['code']}", lambda rec=rec: db_insert(rec))
+    for d, _, novy in prejmenovane:
+        zapis(f"název {d['code']}", lambda d=d, novy=novy: db_update(d["code"], {"name": novy}))
     for d, pn in doplneny_pn:
-        try: db_update(d["code"], {"part_number": pn})
-        except Exception as ex: chyby.append(f"part_number {d['code']}: {ex}")
+        zapis(f"part_number {d['code']}", lambda d=d, pn=pn: db_update(d["code"], {"part_number": pn}))
+    for d, se in prevzate:
+        zapis(f"EAN {d['code']}", lambda d=d, se=se: db_update(d["code"], {"ean": se}))
+        d["ean_puvodni"], d["ean"] = d["ean"], se
+    for d, _ in vyrazene:
+        zapis(f"vyřazení {d['code']}", lambda d=d: db_update(d["code"], {"aktivni": False}))
+    for d, _ in vracene:
+        zapis(f"vrácení {d['code']}", lambda d=d: db_update(d["code"], {"aktivni": True}))
     for ch in chyby:
         log("  ! " + ch)
 
-    # ── 4) XLSX + mail ────────────────────────────────────────────────
+    # ── 5) XLSX + mail ────────────────────────────────────────────────
     nazev = f"shoptet_import_ean_{date.today():%Y-%m-%d}.xlsx"
     data = None
     if k_importu:
@@ -308,28 +395,32 @@ def main():
         log(f"XLSX k importu do Shoptetu: {len(k_importu)} → vystup/{nazev}")
 
     text = "Ahoj,\n\n"
-    if nove:
-        text += f"NOVÉ PRODUKTY ({len(nove)}) – přidány do databáze štítkovačky:\n"
-        text += "\n".join(radek(rec, "EAN ze Shoptetu" if zs else "nový EAN") for rec, zs in nove) + "\n\n"
-    if prevzate:
-        text += f"EAN PŘEVZATÝ ZE SHOPTETU DO DATABÁZE ({len(prevzate)}) – Shoptet měl skutečný čárový kód:\n"
-        text += "\n".join(radek(d, f"dřív {d.get('ean_puvodni', '?')}") for d, _ in prevzate) + "\n\n"
-    if doplneny_pn:
-        text += f"DOPLNĚN KÓD DODAVATELE ({len(doplneny_pn)}):\n"
-        text += "\n".join(f"  {d['code']:<12} {pn:<28} {d['name'][:55]}" for d, pn in doplneny_pn) + "\n\n"
-    if k_importu:
-        text += (f"K IMPORTU DO SHOPTETU ({len(k_importu)}) – v příloze XLSX (code, pairCode, ean),\n"
-                 "stejný formát jako dosud. Po importu se tenhle seznam vyprázdní:\n")
-        text += "\n".join(radek(d, proc) for d, proc in k_importu) + "\n\n"
-    if k_rozhodnuti:
-        text += (f"K ROZHODNUTÍ ({len(k_rozhodnuti)}) – Shoptet má jiný platný EAN než databáze a sync nemá\n"
-                 "právo databázi měnit (chybí SUPABASE_SERVICE_KEY):\n")
-        text += "\n".join(f"  {d['code']:<12} Shoptet {se}  DB {d['ean']}  {d['name'][:45]}" for d, se in k_rozhodnuti) + "\n\n"
-    if chyby:
-        text += "CHYBY:\n" + "\n".join("  " + c for c in chyby) + "\n\n"
+    text += sekce("NOVÉ PRODUKTY – přidány do databáze štítkovačky (zkontroluj dovozce)",
+                  [radek(rec, ("EAN ze Shoptetu" if zs else "nový EAN") + f", {DOVOZCE_NAZEV[rec['dovozce']]}") for rec, zs in nove])
+    text += sekce("K IMPORTU DO SHOPTETU – v příloze XLSX (code, pairCode, ean), po importu zmizí",
+                  [radek(d, proc) for d, proc in k_importu])
+    text += sekce("PŘEJMENOVÁNO PODLE SHOPTETU (štítek teď tiskne nový název)",
+                  [f"  {d['code']:<12} {stary[:40]!s}  →  {novy[:60]}" for d, stary, novy in prejmenovane])
+    text += sekce("VYŘAZENO – produkt už není v Shoptetu (v DB označen neaktivní, nic se nemaže)",
+                  [f"  {d['code']:<12} {d['ean']:<14} {d['name'][:55]}" for d, _ in vyrazene])
+    text += sekce("ZPĚT V SHOPTETU – znovu aktivní",
+                  [f"  {d['code']:<12} {d['ean']:<14} {d['name'][:55]}" for d, _ in vracene])
+    text += sekce("EAN PŘEVZATÝ ZE SHOPTETU DO DATABÁZE – Shoptet měl skutečný čárový kód",
+                  [radek(d, f"dřív {d.get('ean_puvodni', '?')}") for d, _ in prevzate])
+    text += sekce("DOPLNĚN KÓD DODAVATELE",
+                  [f"  {d['code']:<12} {pn:<28} {d['name'][:55]}" for d, pn in doplneny_pn])
+    text += sekce("K ROZHODNUTÍ – sync nemá právo do databáze zapisovat (chybí SUPABASE_SERVICE_KEY)",
+                  [f"  {d['code']:<12} {proc:<45} {d['name'][:40]}" for d, proc in k_rozhodnuti])
+    if bez_klice:
+        text += f"Dalších {bez_klice} změn (názvy/part_number) čeká na SUPABASE_SERVICE_KEY.\n\n"
+    if not MA_AKTIVNI:
+        text += "POZN.: v databázi chybí sloupec products.aktivni – vyřazené produkty se nehlídají.\n\n"
+    text += sekce("CHYBY", ["  " + c for c in chyby])
 
     casti = [f"{len(nove)} nových" if nove else "", f"{len(k_importu)} k importu" if k_importu else "",
-             f"{len(prevzate)} EAN převzato" if prevzate else "", "CHYBY" if chyby else ""]
+             f"{len(prejmenovane)} přejmenováno" if prejmenovane else "", f"{len(vyrazene)} vyřazeno" if vyrazene else "",
+             f"{len(vracene)} vráceno" if vracene else "", f"{len(prevzate)} EAN převzato" if prevzate else "",
+             f"{len(k_rozhodnuti)} k rozhodnutí" if k_rozhodnuti else "", "CHYBY" if chyby else ""]
     subject = "Štítky: " + ", ".join(c for c in casti if c) + f" ({date.today():%d.%m.%Y})"
     posli_mail(subject, text, data, nazev)
     if chyby:
