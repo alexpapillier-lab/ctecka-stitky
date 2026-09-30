@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Generuje PNG štítku. Argumenty: code name length_mm output_path [dpi600] [weee] [serial]"""
+"""Generuje PNG štítku. Argumenty: code name length_mm output_path [dpi600] [weee] [serial] [importer]
+
+importer = klíč dovozce z DB ("apple"/"iswap"/"dyson"/"mobilesentrix"); prázdný,
+chybějící nebo neznámý → dovozce se určí podle názvu (jako dosud)."""
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from label_printer import render_label_image
+from label_printer import render_label_image, importer_text_for
 
 code      = sys.argv[1]
 name      = sys.argv[2]
@@ -12,8 +15,10 @@ output    = sys.argv[4]
 dpi_600   = (sys.argv[5] == "1") if len(sys.argv) > 5 else True
 weee      = (sys.argv[6] == "1") if len(sys.argv) > 6 else True
 serial    = sys.argv[7] if len(sys.argv) > 7 and sys.argv[7] else None
+importer  = sys.argv[8] if len(sys.argv) > 8 and sys.argv[8] else None
 
-product_img = render_label_image(code, name, length_mm=length_mm, dpi_600=dpi_600, show_weee=weee)
+product_img = render_label_image(code, name, length_mm=length_mm, dpi_600=dpi_600, show_weee=weee,
+                                 importer_text=importer_text_for(name, importer))
 
 if serial:
     # Tisknou se dva samostatné fyzické štítky (produktový + SN) – v náhledu
