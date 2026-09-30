@@ -7,7 +7,7 @@ a vytiskne štítek. Rozpozná EAN, náš kód produktu i kód dodavatele
 Výstup: JSON řádky  {"status": "ok"|"error"|"info", "msg": "..."}
 """
 import sys, os, json, time, signal, ssl
-import urllib.request, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Používá se stdlib urllib (ne requests) – na iMacu není requests nainstalovaný
@@ -17,7 +17,12 @@ SUPABASE_URL = "https://osinlzagjimyrzjpdxai.supabase.co"
 SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4"
 HEADERS = {"apikey": SUPABASE_KEY, "Authorization": f"Bearer {SUPABASE_KEY}"}
 
-SELECT = "select=code,name,ean,part_number,show_weee"
+# Nové sloupce dovozce/je_displej/potrebuje_sn v DB ještě nemusí existovat –
+# PostgREST na neznámý sloupec vrátí HTTP 400. Proto se při startu jednou
+# zjistí, který SELECT funguje (viz _ensure_select), a ten se pak používá.
+SELECT_FULL  = "select=code,name,ean,part_number,show_weee,dovozce,je_displej,potrebuje_sn"
+SELECT_BASIC = "select=code,name,ean,part_number,show_weee"
+SELECT = None   # nastaví _ensure_select()
 
 
 def emit(status, msg):
@@ -36,11 +41,10 @@ _CTX = _default_ctx()
 _UNVERIFIED = ssl._create_unverified_context()
 
 
-def _get(query):
+def _fetch(url):
     # Nejdřív ověřené spojení; na Big Sur má starý Python zastaralé CA certy,
     # takže při chybě ověření spojení zopakuj bez kontroly certifikátu
     # (TLS šifrování zůstává). Ostatní chyby (síť) se propagují nahoru.
-    url = f"{SUPABASE_URL}/rest/v1/products?{SELECT}&{query}"
     req = urllib.request.Request(url, headers=HEADERS)
     try:
         with urllib.request.urlopen(req, timeout=6, context=_CTX) as r:
@@ -48,6 +52,27 @@ def _get(query):
     except ssl.SSLError:
         with urllib.request.urlopen(req, timeout=6, context=_UNVERIFIED) as r:
             return json.loads(r.read())
+
+
+def _ensure_select():
+    """Jednou zjistí, jestli DB už má nové sloupce (SELECT_FULL), jinak
+    použije SELECT_BASIC. Výsledek si pamatuje v globální SELECT. Síťová
+    chyba se propaguje a SELECT zůstane None → zkusí se znovu příště."""
+    global SELECT
+    if SELECT is not None:
+        return SELECT
+    try:
+        _fetch(f"{SUPABASE_URL}/rest/v1/products?{SELECT_FULL}&limit=1")
+        SELECT = SELECT_FULL
+    except urllib.error.HTTPError as e:
+        if e.code != 400:
+            raise
+        SELECT = SELECT_BASIC
+    return SELECT
+
+
+def _get(query):
+    return _fetch(f"{SUPABASE_URL}/rest/v1/products?{_ensure_select()}&{query}")
 
 
 def lookup(barcode):
@@ -76,14 +101,18 @@ def lookup(barcode):
 
 
 def print_it(product):
-    from label_printer import render_label_image, print_label, default_length
+    from label_printer import render_label_image, print_label, default_length, importer_text_for
     name = product["name"]
     show_weee = product.get("show_weee")
+    # Hodnoty z DB mají přednost; None (sloupec chybí / nevyplněno) → podle názvu.
+    je_displej = product.get("je_displej")
+    length_mm = default_length(name) if je_displej is None else (125 if je_displej else 62)
     # Scan mód tiskne na 300 DPI kvůli rychlosti (zhruba 2× rychlejší než 600).
     # Render i tisk musí být na stejném DPI.
     img = render_label_image(
         product["code"], name,
-        length_mm=default_length(name),
+        length_mm=length_mm,
+        importer_text=importer_text_for(name, product.get("dovozce")),
         show_weee=True if show_weee is None else show_weee,
         dpi_600=False,
     )
@@ -170,6 +199,13 @@ def _process_lines(buf):
 signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
 
 if __name__ == "__main__":
+    # Jednou při startu zjisti, které sloupce DB má. Když je síť zrovna
+    # nedostupná, nepadej – zjistí se to při prvním skenu.
+    try:
+        _ensure_select()
+    except Exception as e:
+        emit("info", f"Databáze zatím nedostupná ({e}) – zkusím znovu při skenu")
+
     # Ruční test bez čtečky:  python3 scan_print.py 107082001032
     if len(sys.argv) > 1:
         handle(sys.argv[1])
