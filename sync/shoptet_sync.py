@@ -25,7 +25,8 @@ Co dělá při každém běhu:
 4. XLSX (code, pairCode, ean) = vše, co je potřeba naimportovat do Shoptetu
 5. mail (SMTP_* + MAIL_TO), pokud je co hlásit; bez SMTP jen uloží soubor
 
-Lokálně: --nanecisto (nic nezapisuje, neposílá); --test-mail (jen zkušební mail)
+Lokálně: --nanecisto (nic nezapisuje, neposílá); --bez-mailu (zapíše, neposílá);
+--test-mail (jen zkušební mail)
 """
 import io, os, re, sys, json, random, smtplib, ssl, unicodedata, urllib.request, urllib.parse, urllib.error
 import xml.etree.ElementTree as ET
@@ -43,6 +44,7 @@ KEY = SERVICE_KEY or ANON_KEY
 H = {"apikey": KEY, "Authorization": f"Bearer {KEY}", "Content-Type": "application/json"}
 
 NANECISTO = "--nanecisto" in sys.argv
+BEZ_MAILU = "--bez-mailu" in sys.argv   # zapsat do DB, ale neposílat mail (např. velký jednorázový běh)
 MAX_V_MAILU = 40      # delší seznamy se v mailu zkrátí (celé jsou v logu Actions)
 
 
@@ -422,7 +424,10 @@ def main():
              f"{len(vracene)} vráceno" if vracene else "", f"{len(prevzate)} EAN převzato" if prevzate else "",
              f"{len(k_rozhodnuti)} k rozhodnutí" if k_rozhodnuti else "", "CHYBY" if chyby else ""]
     subject = "Štítky: " + ", ".join(c for c in casti if c) + f" ({date.today():%d.%m.%Y})"
-    posli_mail(subject, text, data, nazev)
+    if BEZ_MAILU:
+        log("--bez-mailu: mail neposílám")
+    else:
+        posli_mail(subject, text, data, nazev)
     if chyby:
         sys.exit(1)
 
