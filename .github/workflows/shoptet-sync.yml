@@ -1,0 +1,38 @@
+name: Shoptet → štítkovačka (nové produkty)
+
+on:
+  schedule:
+    - cron: "0 5 * * *"      # denně 05:00 UTC = 07:00 Praha (léto), 06:00 (zima)
+  workflow_dispatch:         # ruční spuštění z GitHubu / API
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install --quiet pandas openpyxl
+
+      - name: Synchronizace
+        env:
+          SHOPTET_EXPORT_URL: ${{ secrets.SHOPTET_EXPORT_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          MAIL_TO:   ${{ secrets.MAIL_TO }}
+        run: python sync/shoptet_sync.py
+
+      - name: Uložit XLSX k běhu (i když mail neodešel)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: import-do-shoptetu
+          path: vystup/
+          if-no-files-found: ignore
+          retention-days: 90
