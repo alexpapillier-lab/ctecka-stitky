@@ -17,22 +17,16 @@ class ScanService: ObservableObject {
 
     private var process: Process?
 
-    private func python() -> String? {
-        let candidates = ["/usr/local/bin/python3.11", "/usr/local/bin/python3",
-                          "/opt/homebrew/bin/python3", "/usr/bin/python3"]
-        return candidates.first { FileManager.default.fileExists(atPath: $0) }
-    }
-
-    private var scriptPath: String {
-        ("~/Desktop/CteckaStitkySW/Scripts/scan_print.py" as NSString).expandingTildeInPath
-    }
-
     func start() {
-        guard !isRunning, let python = python() else { return }
+        guard !isRunning else { return }
         events.removeAll()
+        guard let python = Paths.python else {
+            events.insert(ScanEvent(status: .error, msg: "Python nenalezen"), at: 0)
+            return
+        }
         let proc = Process()
         proc.executableURL = URL(fileURLWithPath: python)
-        proc.arguments = [scriptPath]
+        proc.arguments = [Paths.script("scan_print.py")]
 
         let pipe = Pipe()
         proc.standardOutput = pipe
@@ -53,7 +47,13 @@ class ScanService: ObservableObject {
             DispatchQueue.main.async { self?.isRunning = false }
         }
 
-        try? proc.run()
+        do {
+            try proc.run()
+        } catch {
+            events.insert(ScanEvent(status: .error, msg: "Nelze spustit scan_print.py: \(error.localizedDescription)"), at: 0)
+            isRunning = false
+            return
+        }
         process = proc
         isRunning = true
     }
