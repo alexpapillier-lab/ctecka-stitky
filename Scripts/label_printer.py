@@ -21,6 +21,22 @@ _TELEM_KEY = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJl
               "cm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4")
 
 
+def je_ssl_chyba(e):
+    """True pro chybu ověření certifikátu. urllib ji obvykle NEvyhodí přímo jako
+    ssl.SSLError, ale zabalenou v URLError(reason=SSLCertVerificationError) –
+    prosté `except ssl.SSLError` ji proto minulo a záložní větev se nikdy nespustila."""
+    return isinstance(e, ssl.SSLError) or isinstance(getattr(e, "reason", None), ssl.SSLError)
+
+
+def ssl_kontext():
+    """Ověřený kontext; s certifi (aktuální CA), pokud je k dispozici."""
+    try:
+        import certifi
+        return ssl.create_default_context(cafile=certifi.where())
+    except Exception:
+        return ssl.create_default_context()
+
+
 def nahlas(typ, zprava, kod=None):
     """typ: 'chyba' | 'tisk'. zprava se ořízne na 2000 znaků."""
     try:
@@ -32,9 +48,11 @@ def nahlas(typ, zprava, kod=None):
                    "Content-Type": "application/json", "Prefer": "return=minimal"}
         req = urllib.request.Request(_TELEM_URL, data=body, method="POST", headers=headers)
         try:
-            urllib.request.urlopen(req, timeout=4)
-        except ssl.SSLError:
-            # Big Sur: zastaralé CA certy → zopakuj bez ověření (TLS zůstává)
+            urllib.request.urlopen(req, timeout=4, context=ssl_kontext())
+        except Exception as e:
+            if not je_ssl_chyba(e):
+                raise
+            # Big Sur: zastaralé CA certy → zopakuj bez ověření (TLS šifrování zůstává)
             urllib.request.urlopen(req, timeout=4, context=ssl._create_unverified_context())
     except Exception:
         pass
