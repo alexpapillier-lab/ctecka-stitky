@@ -21,7 +21,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install --quiet pandas openpyxl
+      # pillow: sync importuje Scripts/label_printer.py (klasifikace dovozce), který ho načítá
+      - run: pip install --quiet pandas openpyxl pillow
 
       - name: Synchronizace
         env:
