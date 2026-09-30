@@ -3,10 +3,41 @@
 
 import os
 import re
+import json
+import socket
+import ssl
 import unicodedata
+import urllib.request
 from PIL import Image, ImageDraw, ImageFont
 
 PRINTER_MODEL = "QL-700"
+
+# ── Hlášení na dálku ─────────────────────────────────────────────────────
+# Každá chyba a každý tisk se zapíše do Supabase (tabulka stitky_udalosti),
+# aby šly vidět bez přístupu k iMacu. Fire-and-forget: krátký timeout, nikdy
+# nevyhodí výjimku a nezdrží tisk. Když tabulka/síť není, tiše se přeskočí.
+_TELEM_URL = "https://osinlzagjimyrzjpdxai.supabase.co/rest/v1/stitky_udalosti"
+_TELEM_KEY = ("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwi"
+              "cm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4")
+
+
+def nahlas(typ, zprava, kod=None):
+    """typ: 'chyba' | 'tisk'. zprava se ořízne na 2000 znaků."""
+    try:
+        body = json.dumps({
+            "typ": typ, "kod": kod, "zprava": str(zprava)[:2000],
+            "stroj": socket.gethostname().split(".")[0],
+        }).encode("utf-8")
+        headers = {"apikey": _TELEM_KEY, "Authorization": f"Bearer {_TELEM_KEY}",
+                   "Content-Type": "application/json", "Prefer": "return=minimal"}
+        req = urllib.request.Request(_TELEM_URL, data=body, method="POST", headers=headers)
+        try:
+            urllib.request.urlopen(req, timeout=4)
+        except ssl.SSLError:
+            # Big Sur: zastaralé CA certy → zopakuj bez ověření (TLS zůstává)
+            urllib.request.urlopen(req, timeout=4, context=ssl._create_unverified_context())
+    except Exception:
+        pass
 
 
 def _norm(name):
