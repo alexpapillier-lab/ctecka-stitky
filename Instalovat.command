@@ -35,7 +35,10 @@ echo ""
 
 PY="$VENV/bin/python3"
 "$PY" -m pip install --upgrade pip --quiet
-if ! "$PY" -m pip install --upgrade pillow python-barcode brother_ql pyserial pyusb; then
+# certifi = aktuální CA certifikáty; Big Sur má systémové zastaralé a bez
+# certifi padá ověřené HTTPS spojení na Supabase (skripty mají zálohu, ale
+# s certifi jde vše ověřeně).
+if ! "$PY" -m pip install --upgrade pillow python-barcode brother_ql pyserial pyusb certifi; then
     echo ""
     echo "CHYBA: instalace balíčků selhala"
     pause
