@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 5 * * *"      # denně 05:00 UTC = 07:00 Praha (léto), 06:00 (zima)
   workflow_dispatch:         # ruční spuštění z GitHubu / API
+    inputs:
+      test_mail:
+        description: "Jen poslat testovací mail (neřeší produkty)"
+        type: boolean
+        default: false
 
 jobs:
   sync:
@@ -26,7 +31,7 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO:   ${{ secrets.MAIL_TO }}
-        run: python sync/shoptet_sync.py
+        run: python sync/shoptet_sync.py ${{ inputs.test_mail == true && '--test-mail' || '' }}
 
       - name: Uložit XLSX k běhu (i když mail neodešel)
         if: always()
