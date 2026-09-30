@@ -110,8 +110,32 @@ def classify_importer(name):
     return DEFAULT_IMPORTER_TEXT
 
 
-def mm_to_px(mm):
-    return int(round(mm * PX_PER_MM))
+# Klíč dovozce (hodnota sloupce products.dovozce v Supabase) → text na štítek.
+IMPORTER_BY_KEY = {
+    "apple": APPLE_IMPORTER_TEXT,
+    "iswap": ISWAP_IMPORTER_TEXT,
+    "dyson": DYSON_IMPORTER_TEXT,
+    "mobilesentrix": DEFAULT_IMPORTER_TEXT,
+}
+_KEY_BY_IMPORTER_TEXT = {text: key for key, text in IMPORTER_BY_KEY.items()}
+
+
+def importer_key_for(name):
+    """Klíč dovozce ("apple"/"iswap"/"dyson"/"mobilesentrix") podle názvu –
+    stejná logika jako classify_importer, jen vrací klíč místo textu.
+    Používá se pro naplnění sloupce products.dovozce v DB."""
+    return _KEY_BY_IMPORTER_TEXT[classify_importer(name)]
+
+
+def importer_text_for(name, key=None):
+    """Text dovozce na štítek. Platný klíč (viz IMPORTER_BY_KEY) má přednost;
+    prázdný/None/neznámý klíč → rozhodne se podle názvu (classify_importer).
+    Nikdy nevyhazuje – neznámá hodnota z DB nesmí shodit tisk."""
+    if key:
+        text = IMPORTER_BY_KEY.get(str(key).strip().lower())
+        if text:
+            return text
+    return classify_importer(name)
 
 
 def _font(size_px, bold=False):
@@ -140,67 +164,6 @@ def _draw_weee_icon(draw, x, y, size, _img_ref=None):
             return
 
 
-def _draw_weee_icon_fallback(draw, x, y, size):
-    """Symbol přeškrtnuté popelnice (WEEE) – věrná kopie standardní ikony."""
-    w = size
-    lw  = max(1, int(w * 0.05))
-    slw = max(1, int(w * 0.032))
-
-    # ── Tělo – výrazný lichoběžník (nahoře výrazně širší) ────────
-    btop_y = y + w * 0.275
-    bbot_y = y + w * 0.905
-    btop_l = x + w * 0.085
-    btop_r = x + w * 0.915
-    bbot_l = x + w * 0.200
-    bbot_r = x + w * 0.800
-
-    body_pts = [
-        (btop_l, btop_y), (btop_r, btop_y),
-        (bbot_r, bbot_y), (bbot_l, bbot_y),
-    ]
-    draw.polygon(body_pts, outline="black", fill="white")
-    for a, b in zip(body_pts, body_pts[1:] + [body_pts[0]]):
-        draw.line([a, b], fill="black", width=lw)
-
-    # ── Tenký vodorovný pruh na těle ────────────────────────────
-    t = 0.35
-    sl = btop_l + (bbot_l - btop_l) * t + w * 0.03
-    sr = btop_r + (bbot_r - btop_r) * t - w * 0.03
-    sy = btop_y + (bbot_y - btop_y) * t
-    sh = max(lw, int(w * 0.05))
-    draw.rectangle([sl, sy, sr, sy + sh], fill="black")
-
-    # ── Víko – zaoblený obdélník ─────────────────────────────────
-    lid_t = y + w * 0.175
-    lid_b = btop_y
-    lid_l = btop_l - w * 0.03
-    lid_r = btop_r + w * 0.03
-    r = max(2, int(w * 0.05))
-    draw.rounded_rectangle([lid_l, lid_t, lid_r, lid_b],
-                            radius=r, outline="black", fill="white", width=lw)
-
-    # ── Madlo – malý zaoblený obdélník uprostřed nahoře ─────────
-    hl = x + w * 0.38
-    hr = x + w * 0.62
-    ht = y + w * 0.07
-    hb = lid_t + w * 0.005
-    draw.rounded_rectangle([hl, ht, hr, hb],
-                            radius=max(1, int(w * 0.03)),
-                            outline="black", fill="white", width=slw)
-
-    # ── Kolečka ──────────────────────────────────────────────────
-    wr = max(2, int(w * 0.065))
-    draw.ellipse([bbot_l - wr, bbot_y - wr, bbot_l + wr, bbot_y + wr],
-                 outline="black", fill="white", width=slw)
-    draw.ellipse([bbot_r - wr, bbot_y - wr, bbot_r + wr, bbot_y + wr],
-                 outline="black", fill="white", width=slw)
-
-    # ── Křížek přes celou ikonu ──────────────────────────────────
-    clw = max(2, int(w * 0.06))
-    draw.line([(x, y), (x + w, y + w)], fill="black", width=clw)
-    draw.line([(x, y + w), (x + w, y)], fill="black", width=clw)
-
-
 def _wrap_text(draw, text, font, max_width):
     words = text.split(" ")
     lines = []
@@ -216,21 +179,6 @@ def _wrap_text(draw, text, font, max_width):
     if cur:
         lines.append(cur)
     return lines
-
-
-def _draw_fitted_text(draw, text, x, y, max_width, font, max_lines=2):
-    """Zalomí text na max_lines řádků; pokud nestačí, poslední řádek zkrátí s '…'."""
-    lines = _wrap_text(draw, text, font, max_width)
-    if len(lines) > max_lines:
-        lines = lines[:max_lines]
-        last = lines[-1]
-        while last and draw.textbbox((0, 0), last + "…", font=font)[2] - draw.textbbox((0, 0), "", font=font)[0] > max_width:
-            last = last[:-1]
-        lines[-1] = last.rstrip() + "…"
-    line_h = int(font.size * 1.15)
-    for i, line in enumerate(lines):
-        draw.text((x, y + i * line_h), line, fill="black", font=font)
-    return len(lines) * line_h
 
 
 def _parse_display_name(name):
@@ -441,55 +389,10 @@ def _render_display_label(code, name, height_px, width_px, importer_text, img):
         draw.text((rx, cy), variant, fill="black", font=var_font)
 
 
-def _calc_min_length_mm(code, name, importer_text, height_px, ppm, min_mm=38, max_mm=62):
-    """Najde nejkratší délku (v mm) kde se obsah malého štítku vejde."""
-    from PIL import Image as _Img, ImageDraw as _ID
-    for mm in range(min_mm, max_mm + 1):
-        w = int(mm * ppm)
-        margin = int(height_px * 0.05)
-        top_h = int(height_px * 0.62)
-        bottom_h = height_px - top_h
-        icon_size = int((top_h - 2 * margin) * 0.45)
-        after_icon = margin + icon_size + int(height_px * 0.06)
-
-        # Čárový kód rotovaný 90° – šířka = výška originálního * ratio
-        import barcode as _bc
-        from barcode.writer import ImageWriter
-        bc_raw = _bc.get("code128", str(code), writer=ImageWriter())
-        bc_img = bc_raw.render({"module_height": 8.0, "font_size": 0,
-                                "text_distance": 1, "quiet_zone": 1, "write_text": False})
-        bc_img_rot = bc_img.rotate(90, expand=True)
-        bc_avail_h = top_h - 2 * margin
-        bc_ratio   = bc_avail_h / bc_img_rot.height
-        bc_col_w   = int(bc_img_rot.width * bc_ratio)  # šířka rotovaného kódu
-
-        text_area_w = int((w - after_icon - margin) * 0.52)
-        bc_space = w - after_icon - text_area_w - int(height_px * 0.06) - margin
-        if bc_space < bc_col_w:
-            continue
-
-        # Importer text – musí se vejít do bottom_h
-        tmp = _Img.new("RGB", (w, height_px), "white")
-        d = _ID.Draw(tmp)
-        fs = int(height_px * 0.075)
-        while fs > int(height_px * 0.04):
-            f = _font(fs)
-            lines = _wrap_text(d, importer_text, f, w - 2 * margin)
-            if int(fs * 1.25) * len(lines) <= bottom_h - margin:
-                break
-            fs -= 1
-        else:
-            continue  # importer se nevejde ani při min fontu
-
-        return mm
-    return max_mm
-
-
 def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=None, show_weee=True):
     """Vytvoří obrázek štítku – 29mm páska, délka length_mm. Vrací PIL Image (landscape)."""
     if importer_text is None:
         importer_text = classify_importer(name)
-    barcode_payload = code
     if dpi_600 is None:
         dpi_600 = PRINT_DPI_600
 
@@ -523,7 +426,6 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     text_h = int(height_px * 0.30)
     bc_h_area = int(height_px * 0.40)
     bottom_h = height_px - text_h - bc_h_area
-    top_h = text_h  # pro dovozce výpočty níže
 
     # Ikona – menší (45% výšky textu)
     icon_size = int((text_h - 2 * margin) * 0.8)
@@ -562,7 +464,7 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         for i, line in enumerate(dev_lines):
             draw.text((_cx(line, dev_font, name_x, text_area_w), margin + i * dev_lh), line, fill="black", font=dev_font)
         desc_start_y = margin + used_h + int(height_px * 0.02)
-        desc_avail_h = top_h - desc_start_y - margin
+        desc_avail_h = text_h - desc_start_y - margin
         desc_font, desc_lines = _fit_name(desc, False, text_area_w, desc_avail_h, 3, int(height_px * 0.19))
         desc_lh = int(desc_font.size * 1.15)
         for i, line in enumerate(desc_lines):
@@ -578,11 +480,11 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     # k dispozici – jinak se při málo místě zmenšuje i šířka a kód je nečitelný.
     import barcode
     from barcode.writer import ImageWriter
-    bc = barcode.get("code128", str(barcode_payload), writer=ImageWriter())
+    bc = barcode.get("code128", str(code), writer=ImageWriter())
 
     code_font_size = int(height_px * 0.075)
     code_font = _font(code_font_size)
-    code_text = str(barcode_payload)
+    code_text = str(code)
     code_tw = int(draw.textlength(code_text, font=code_font))
     text_gap = int(width_px * 0.02)
 
@@ -612,7 +514,7 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
     # Dolní pásmo – text o dovozci
     max_text_width = width_px - 2 * margin
     available_h = bottom_h - margin
-    top_h = text_h + bc_h_area  # y offset pro dovozce
+    footer_top = text_h + bc_h_area  # y offset pro dovozce
     font_size = int(height_px * 0.075)
     while font_size > int(height_px * 0.04):
         importer_font = _font(font_size)
@@ -621,7 +523,7 @@ def render_label_image(code, name, length_mm=125, importer_text=None, dpi_600=No
         if line_h * len(lines) <= available_h:
             break
         font_size -= 1
-    footer_y = top_h + int(margin * 0.5)
+    footer_y = footer_top + int(margin * 0.5)
     for i, line in enumerate(lines):
         draw.text((margin, footer_y + i * line_h), line, fill="black", font=importer_font)
 
