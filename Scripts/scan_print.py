@@ -27,6 +27,13 @@ SELECT = None   # nastaví _ensure_select()
 
 def emit(status, msg):
     print(json.dumps({"status": status, "msg": msg}), flush=True)
+    # Chyby a úspěšné tisky ze scan módu hlásit i na dálku (viz label_printer.nahlas).
+    if status in ("error", "ok"):
+        try:
+            from label_printer import nahlas
+            nahlas("chyba" if status == "error" else "tisk", "scan: " + msg)
+        except Exception:
+            pass
 
 
 def _default_ctx():
