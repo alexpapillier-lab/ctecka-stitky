@@ -13,7 +13,7 @@ fi
 
 log() { echo "$1"; echo "$(date '+%Y-%m-%d %H:%M:%S')  $1" >> "$LOG"; }
 
-log "=== Aktualizace štítků ==="
+log "=== Aktualizace štítků === (macOS $(sw_vers -productVersion 2>/dev/null), $(uname -m), $(hostname -s 2>/dev/null))"
 
 # Stahuje se přes API GitHubu, ne přes raw.githubusercontent – ten drží starou
 # verzi v cache několik minut po nahrání změn.
