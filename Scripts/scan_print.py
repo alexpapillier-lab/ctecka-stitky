@@ -52,11 +52,16 @@ def _fetch(url):
     # Nejdřív ověřené spojení; na Big Sur má starý Python zastaralé CA certy,
     # takže při chybě ověření spojení zopakuj bez kontroly certifikátu
     # (TLS šifrování zůstává). Ostatní chyby (síť) se propagují nahoru.
+    # POZOR: urllib chybu certifikátu obvykle zabalí do URLError(reason=SSLError),
+    # takže `except ssl.SSLError` ji minul a záloha se nikdy nespustila. Proto
+    # chytáme vše a rozhodujeme podle typu (viz label_printer.je_ssl_chyba).
     req = urllib.request.Request(url, headers=HEADERS)
     try:
         with urllib.request.urlopen(req, timeout=6, context=_CTX) as r:
             return json.loads(r.read())
-    except ssl.SSLError:
+    except Exception as e:
+        if not (isinstance(e, ssl.SSLError) or isinstance(getattr(e, "reason", None), ssl.SSLError)):
+            raise
         with urllib.request.urlopen(req, timeout=6, context=_UNVERIFIED) as r:
             return json.loads(r.read())
 
