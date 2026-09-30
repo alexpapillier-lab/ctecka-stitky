@@ -1,13 +1,7 @@
 #!/bin/bash
-# Spustí štítkovou appku. Před startem stáhne nové verze tiskových skriptů
-# (vzhled štítků, dovozci, scan mód) – takže změny pushnuté z MacBooku se
-# na iMac dostanou samy při příštím spuštění. Bez internetu se stahování
-# jen přeskočí a appka startuje se stávající verzí.
+# Stub – neměnit. Stáhne aktuální skripty a předá řízení Scripts/start.sh,
+# který si sám hlídá i nové verze appky (binárky) včetně zálohy a rollbacku.
 DIR="$(cd "$(dirname "$0")" && pwd)"
-
-if [ -f "$DIR/AktualizovatStitky.command" ]; then
-  # < /dev/null: updater pak nečeká na Enter a appka naskočí hned
-  bash "$DIR/AktualizovatStitky.command" < /dev/null
-fi
-
+[ -f "$DIR/AktualizovatStitky.command" ] && bash "$DIR/AktualizovatStitky.command" < /dev/null
+[ -f "$DIR/Scripts/start.sh" ] && exec bash "$DIR/Scripts/start.sh"
 exec "$DIR/CteckaStitkySW"
