@@ -71,13 +71,19 @@ struct ManualView: View {
     @State private var lengthMM = 62
     @State private var dpi600 = true
     @State private var savedPath: String?
-    @State private var printResult: PrintResult?
-    @State private var showWEEEDialog = false
+    /// Výsledek poslední akce (náhled i tisk) – chyba se zobrazí červeně pod tlačítky.
+    @State private var lastResult: ActionResult?
     @State private var pendingAction: PendingAction?
+    @State private var serialNumber = ""
+    @State private var activeAlert: ActiveAlert?
 
     enum PendingAction { case generate, print }
+    enum ActiveAlert: Identifiable {
+        case weee, serialMissing
+        var id: Int { hashValue }
+    }
 
-    enum PrintResult { case ok, error(String) }
+    enum ActionResult { case printed, error(String) }
 
     var body: some View {
         HSplitView {
@@ -204,16 +210,27 @@ struct ManualView: View {
                             .disabled(isGenerating || isPrinting)
                         }
 
-                        // Výsledek tisku
-                        if let r = printResult {
-                            HStack(spacing: 6) {
+                        if product.needsSerialNumber {
+                            HStack {
+                                Text("Sériové číslo:").foregroundColor(.secondary)
+                                TextField("vepiš sériové číslo jednotky…", text: $serialNumber)
+                                    .textFieldStyle(.roundedBorder)
+                                    .frame(maxWidth: 260)
+                            }
+                        }
+
+                        // Výsledek poslední akce (tisk / náhled)
+                        if let r = lastResult {
+                            HStack(alignment: .top, spacing: 6) {
                                 switch r {
-                                case .ok:
+                                case .printed:
                                     Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
                                     Text("Vytištěno").foregroundColor(.green)
                                 case .error(let msg):
                                     Image(systemName: "xmark.circle.fill").foregroundColor(.red)
-                                    Text(msg).foregroundColor(.red).lineLimit(2)
+                                    Text(msg).foregroundColor(.red)
+                                        .lineLimit(6)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 }
                             }
                             .font(.caption)
@@ -277,37 +294,60 @@ struct ManualView: View {
             .frame(minWidth: 500)
         }
         .onAppear { Task { await vm.load() } }
-        .alert(isPresented: $showWEEEDialog) {
-            Alert(
-                title: Text("Zobrazit ikonu přeškrtnuté popelnice (WEEE)?"),
-                message: Text("Volba se uloží pro příští tisky tohoto produktu."),
-                primaryButton: .default(Text("Ano – zobrazit")) {
-                    if let p = selected {
-                        Task { await WEEEPrefs.shared.set(true, for: p.code) }
-                        runPendingAction(product: p)
+        .alert(item: $activeAlert) { alert in
+            switch alert {
+            case .weee:
+                return Alert(
+                    title: Text("Zobrazit ikonu přeškrtnuté popelnice (WEEE)?"),
+                    message: Text("Volba se uloží pro příští tisky tohoto produktu."),
+                    primaryButton: .default(Text("Ano – zobrazit")) {
+                        if let p = selected {
+                            Task { await WEEEPrefs.shared.set(true, for: p.code) }
+                            runPendingAction(product: p)
+                        }
+                    },
+                    secondaryButton: .cancel(Text("Ne – nezobrazovat")) {
+                        if let p = selected {
+                            Task { await WEEEPrefs.shared.set(false, for: p.code) }
+                            runPendingAction(product: p)
+                        }
                     }
-                },
-                secondaryButton: .cancel(Text("Ne – nezobrazovat")) {
-                    if let p = selected {
-                        Task { await WEEEPrefs.shared.set(false, for: p.code) }
-                        runPendingAction(product: p)
-                    }
-                }
-            )
+                )
+            case .serialMissing:
+                return Alert(
+                    title: Text("Chybí sériové číslo"),
+                    message: Text("Před tiskem vepiš sériové číslo této jednotky."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
         .onChange(of: selected) { product in
             labelImage = nil
             savedPath = nil
-            printResult = nil
+            lastResult = nil
+            serialNumber = ""
             if let p = product { lengthMM = p.defaultLength }
         }
     }
 
+    private var trimmedSerial: String? {
+        let s = serialNumber.trimmingCharacters(in: .whitespaces)
+        return s.isEmpty ? nil : s
+    }
+
+    /// Vrátí false a ukáže upozornění, pokud produkt vyžaduje sériové číslo a není vyplněné.
+    private func requireSerialIfNeeded(_ product: Product) -> Bool {
+        guard product.needsSerialNumber, trimmedSerial == nil else { return true }
+        activeAlert = .serialMissing
+        return false
+    }
+
     private func generate(product: Product) async {
+        guard requireSerialIfNeeded(product) else { return }
         if !WEEEPrefs.shared.hasChoice(for: product.code) {
             await MainActor.run {
                 pendingAction = .generate
-                showWEEEDialog = true
+                activeAlert = .weee
             }
             return
         }
@@ -317,16 +357,23 @@ struct ManualView: View {
     private func doGenerate(product: Product) async {
         isGenerating = true
         labelImage = nil
+        lastResult = nil
         let weee = WEEEPrefs.shared.get(for: product.code)
-        labelImage = await LabelGenerator.generate(code: product.code, name: product.name, lengthMM: lengthMM, dpi600: dpi600, weee: weee)
+        let (image, err) = await LabelGenerator.generate(
+            code: product.code, name: product.name, lengthMM: lengthMM, dpi600: dpi600, weee: weee,
+            serial: trimmedSerial, importer: product.dovozce
+        )
+        labelImage = image
+        if let err = err { lastResult = .error(err) }
         isGenerating = false
     }
 
     private func doPrint(product: Product) async {
+        guard requireSerialIfNeeded(product) else { return }
         if !WEEEPrefs.shared.hasChoice(for: product.code) {
             await MainActor.run {
                 pendingAction = .print
-                showWEEEDialog = true
+                activeAlert = .weee
             }
             return
         }
@@ -335,13 +382,14 @@ struct ManualView: View {
 
     private func doActualPrint(product: Product) async {
         isPrinting = true
-        printResult = nil
+        lastResult = nil
         let weee = WEEEPrefs.shared.get(for: product.code)
         let (ok, err) = await PrintService.shared.print(
-            code: product.code, name: product.name, lengthMM: lengthMM, copies: copies, dpi600: dpi600, weee: weee
+            code: product.code, name: product.name, lengthMM: lengthMM, copies: copies, dpi600: dpi600, weee: weee,
+            serial: trimmedSerial, importer: product.dovozce
         )
         isPrinting = false
-        printResult = ok ? .ok : .error(err ?? "Neznámá chyba")
+        lastResult = ok ? .printed : .error(err ?? "Neznámá chyba")
     }
 
     private func runPendingAction(product: Product) {
