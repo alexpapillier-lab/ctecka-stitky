@@ -70,14 +70,15 @@ ISWAP_IMPORTER_TEXT = (
     "IČ: 14340101, DIČ: CZ14340101"
 )
 
-# Nářadí a spotřební materiál (šroubováky, pinzety, pásky, lepidla, čepelky…) = iSwap.cz.
+# Nářadí (šroubováky, pinzety, otvíráky, skalpely/čepelky, pistole, podložky…) = iSwap.cz.
+# Lepicí pásky, lepidla a SIM šuplíky sem NEPATŘÍ – ty jsou MobileSentrix.
 _TOOL_KEYWORDS = [
     "šroubovák", "nářadí", "otevírací", "otevírák", "otevíra", "skalpel", "pinzeta",
-    "sání", "přísavk", "lepidlo", "lepící páska", "lepici paska", "kaptonová",
+    "sání", "přísavk",
     "čistič", "izopropyl", "stěrka", "kartáč", "kladívko", "kleště", "žiletka",
     "trsátko", "iopener", "opener", "tavná pistole", "pistole na aplikaci",
     "rukavice", "brýle", "lupa", "mikroskop", "podložka", "štípací", "čepel",
-    "břity", "páčidlo", "šuplík", "wowpad",
+    "břity", "páčidlo", "wowpad",
 ]
 
 
@@ -100,7 +101,10 @@ def classify_importer(name):
     if re.search(r"origin\w*\s+(?:apple\s+)?baterie", n) or "originální těsnění" in n or is_airpods_part:
         return APPLE_IMPORTER_TEXT
 
-    if "originální" in n or any(kw in n for kw in _TOOL_KEYWORDS):
+    # Originální kabely a nabíječky (MagSafe, USB-C, Watch) jsou výjimka
+    # z "ostatní originální = iSwap" – ty jsou MobileSentrix.
+    is_cable_or_charger = "kabel" in n or "nabíječk" in n
+    if ("originální" in n and not is_cable_or_charger) or any(kw in n for kw in _TOOL_KEYWORDS):
         return ISWAP_IMPORTER_TEXT
 
     return DEFAULT_IMPORTER_TEXT
@@ -712,6 +716,14 @@ def print_labels(images, copies=1, printer_identifier=None, rotate="90", dpi_600
     dpi_600 musí odpovídat DPI, na kterém byly obrázky vyrenderovány; None =
     výchozí (PRINT_DPI_600). 300 DPI tiskne zhruba 2× rychleji než 600 DPI.
     """
+    # brother_ql sype na stderr neškodná varování ("devicedependent is deprecated",
+    # "Trying to switch the operating mode…" – to druhé QL-700 hlásí při KAŽDÉM
+    # tisku). Appka zobrazuje jen první 2 řádky stderr, takže tahle varování
+    # zakrývala skutečnou chybu. Proto je potlačíme.
+    import logging, warnings, time
+    warnings.filterwarnings("ignore")
+    logging.getLogger("brother_ql").setLevel(logging.ERROR)
+
     from brother_ql.conversion import convert
     from brother_ql.raster import BrotherQLRaster
     from brother_ql.backends.helpers import send
@@ -746,11 +758,24 @@ def print_labels(images, copies=1, printer_identifier=None, rotate="90", dpi_600
             hq=True,
             cut=True,
         )
-        send(instructions=instructions, printer_identifier=printer_identifier,
-             backend_identifier="pyusb", blocking=True)
-        return True, None
     except Exception as e:
-        return False, str(e)
+        return False, f"Chyba při přípravě tisku: {e}"
+
+    # USB spojení s QL-700 občas uprostřed dávky vypadne (stalo se při 7 kopiích).
+    # Druhý pokus si tiskárnu znovu najde – když se jen na chvíli odpojila,
+    # projde; když je opravdu pryč, vrátíme čitelnou chybu.
+    last_err = None
+    for attempt in (1, 2):
+        try:
+            send(instructions=instructions, printer_identifier=printer_identifier,
+                 backend_identifier="pyusb", blocking=True)
+            return True, None
+        except Exception as e:
+            last_err = e
+            if attempt == 1:
+                time.sleep(2)
+                printer_identifier = find_printer() or printer_identifier
+    return False, f"Tisk selhal (2 pokusy): {last_err}"
 
 
 def print_label(image, copies=1, printer_identifier=None, rotate="90", dpi_600=None):
