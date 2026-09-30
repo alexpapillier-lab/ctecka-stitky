@@ -42,6 +42,7 @@ for f in $FILES; do
       mv "$TMP" "$DIR/Scripts/$f"     # přepiš až po úspěšném stažení
       log "✓ $f AKTUALIZOVÁN"
       CHANGED=1
+      ZMENENO="${ZMENENO:+$ZMENENO }$f"
     fi
   else
     rm -f "$TMP"
@@ -57,12 +58,25 @@ if [ "$CHANGED" = "1" ]; then
 fi
 
 if [ "$FAILED" = "1" ]; then
-  log "=== Dokončeno s chybami ==="
+  log "=== Dokončeno s chybami ==="; VYSLEDEK="chyba"
 elif [ "$CHANGED" = "1" ]; then
-  log "=== Hotovo – staženy nové verze ==="
+  log "=== Hotovo – staženy nové verze ==="; VYSLEDEK="aktualizovano"
 else
-  log "=== Hotovo – vše už bylo aktuální ==="
+  log "=== Hotovo – vše už bylo aktuální ==="; VYSLEDEK="beze-zmeny"
 fi
+
+# Pošli záznam o běhu do Supabase (tabulka stitky_aktualizace), aby šlo
+# na dálku ověřit, že se změny na stroj dostaly. Jen curl, žádné závislosti;
+# když to selže (bez internetu), nic se neděje – lokální log stačí.
+SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4'
+JSON=$(printf '{"stroj":"%s","macos":"%s","arch":"%s","vysledek":"%s","zmeneno":"%s"}' \
+  "$(hostname -s 2>/dev/null)" "$(sw_vers -productVersion 2>/dev/null)" "$(uname -m)" \
+  "$VYSLEDEK" "${ZMENENO:-"-"}")
+curl -s -o /dev/null --max-time 10 -X POST \
+  "https://osinlzagjimyrzjpdxai.supabase.co/rest/v1/stitky_aktualizace" \
+  -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+  -H "Content-Type: application/json" -H "Prefer: return=minimal" \
+  -d "$JSON" 2>/dev/null || true
 
 # Na Enter čekej jen když běžíme v terminálu (dvojklik), ne pod launchd.
 if [ -t 0 ]; then
