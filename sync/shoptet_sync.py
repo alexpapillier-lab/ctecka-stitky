@@ -194,6 +194,12 @@ def posli_mail(vsechny, k_importu, xlsx_bytes, nazev):
 
 # ── Hlavní běh ────────────────────────────────────────────────────────────
 def main():
+    if "--test-mail" in sys.argv:
+        # Ověření doručení mailu bez čekání na nový produkt (workflow_dispatch → test_mail).
+        ok = posli_mail([{"code": "TEST", "ean": "0000000000000", "name": "testovací zpráva – žádný produkt",
+                          "ean_ze_shoptetu": True}], [], None, "")
+        raise SystemExit(0 if ok else 1)
+
     url = os.environ.get("SHOPTET_EXPORT_URL")
     if not url:
         raise SystemExit("chybí env SHOPTET_EXPORT_URL")
