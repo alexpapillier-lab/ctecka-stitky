@@ -93,8 +93,11 @@ def classify_importer(name):
     if "dyson" in n:
         return DYSON_IMPORTER_TEXT
 
-    # "originální baterie" i "originální Apple baterie" (slovo Apple mezi nimi)
-    if re.search(r"origin\w*\s+(?:apple\s+)?baterie", n) or "originální těsnění" in n or "airpod" in n:
+    # "originální baterie" i "originální Apple baterie" (slovo Apple mezi nimi).
+    # AirPods = Apple, ale baterie DO AirPods (Ampsentrix apod.) ne – ty jsou
+    # MobileSentrix, proto "baterie" z AirPods pravidla vyjmuta.
+    is_airpods_part = "airpod" in n and "baterie" not in n
+    if re.search(r"origin\w*\s+(?:apple\s+)?baterie", n) or "originální těsnění" in n or is_airpods_part:
         return APPLE_IMPORTER_TEXT
 
     if "originální" in n or any(kw in n for kw in _TOOL_KEYWORDS):
