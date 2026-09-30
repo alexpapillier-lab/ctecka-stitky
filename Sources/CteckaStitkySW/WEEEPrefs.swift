@@ -3,9 +3,6 @@ import Foundation
 class WEEEPrefs {
     static let shared = WEEEPrefs()
 
-    private let baseURL = "https://osinlzagjimyrzjpdxai.supabase.co/rest/v1/products"
-    private let key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ0.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4"
-
     // Lokální cache – načteno při startu z DB
     private var cache: [String: Bool?] = [:]
 
@@ -29,14 +26,18 @@ class WEEEPrefs {
     }
 
     private func patch(code: String, value: Bool) async {
-        guard let encoded = code.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-              let url = URL(string: "\(baseURL)?code=eq.\(encoded)") else { return }
-        var req = URLRequest(url: url)
+        guard let encoded = code.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        var req = SupabaseConfig.request("/products?code=eq.\(encoded)")
         req.httpMethod = "PATCH"
-        req.setValue(key, forHTTPHeaderField: "apikey")
-        req.setValue("Bearer \(key)", forHTTPHeaderField: "Authorization")
         req.setValue("application/json", forHTTPHeaderField: "Content-Type")
         req.httpBody = try? JSONSerialization.data(withJSONObject: ["show_weee": value])
-        _ = try? await URLSession.shared.data(for: req)
+        do {
+            let (_, response) = try await URLSession.shared.data(for: req)
+            if let http = response as? HTTPURLResponse, !(200..<300).contains(http.statusCode) {
+                NSLog("WEEEPrefs: uložení show_weee pro %@ selhalo (HTTP %d)", code, http.statusCode)
+            }
+        } catch {
+            NSLog("WEEEPrefs: uložení show_weee pro %@ selhalo: %@", code, error.localizedDescription)
+        }
     }
 }
