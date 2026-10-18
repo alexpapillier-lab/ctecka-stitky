@@ -1,4 +1,4 @@
-name: Shoptet → štítkovačka (nové produkty)
+name: Shoptet → štítkovačka (sync + ping DB)
 
 on:
   schedule:
@@ -38,6 +38,20 @@ jobs:
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           MAIL_TO:   ${{ secrets.MAIL_TO }}
         run: python sync/shoptet_sync.py ${{ inputs.test_mail == true && '--test-mail' || '' }} ${{ inputs.bez_mailu == true && '--bez-mailu' || '' }}
+
+      # Běží VŽDY (i když sync spadne): Supabase projekt je na Free plánu a po
+      # 7 dnech bez jediného API dotazu by se uspal (probouzí se jen ručně
+      # v dashboardu). Sync se DB dotýká až po stažení Shoptet exportu, takže
+      # ve dnech, kdy Shoptet neodpoví, by dotaz chyběl – tohle ho zaručí.
+      - name: Ping Supabase (udržet projekt vzhůru)
+        if: always()
+        run: |
+          K=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zaW5semFnamlteXJ6anBkeGFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MDUzMDcsImV4cCI6MjA5NzE4MTMwN30.aWkcUv9jpwbqQ3fSHZ_damRGwSqxC_YtH3siySoMgq4
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            "https://osinlzagjimyrzjpdxai.supabase.co/rest/v1/products?select=code&limit=1" \
+            -H "apikey: $K" -H "Authorization: Bearer $K")
+          echo "Supabase odpověděla HTTP $code"
+          test "$code" = "200"
 
       - name: Uložit XLSX k běhu (i když mail neodešel)
         if: always()
