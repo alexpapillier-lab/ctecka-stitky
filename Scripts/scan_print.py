@@ -25,8 +25,13 @@ SELECT_BASIC = "select=code,name,ean,part_number,show_weee"
 SELECT = None   # nastaví _ensure_select()
 
 
-def emit(status, msg):
-    print(json.dumps({"status": status, "msg": msg}), flush=True)
+def emit(status, msg, **extra):
+    """JSON řádek pro appku. Volitelná pole (code, name, source, barcode, kind)
+    používá appka v7+ pro velkou kartu výsledku. Musí to být jen stringy –
+    appka v6 čte řádek jako [String: String] a jinak by ho zahodila."""
+    out = {"status": status, "msg": msg}
+    out.update({k: str(v) for k, v in extra.items() if v is not None})
+    print(json.dumps(out, ensure_ascii=False), flush=True)
     # Chyby a úspěšné tisky ze scan módu hlásit i na dálku (viz label_printer.nahlas).
     if status in ("error", "ok"):
         try:
@@ -112,6 +117,41 @@ def lookup(barcode):
     return [], None
 
 
+# Seznam produktů, který appka (v7+) ukládá po každém úspěšném načtení z DB.
+# Když není internet, scan hledá tady – tisk sám o sobě internet nepotřebuje.
+CACHE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "products_cache.json")
+
+
+def lookup_cache(barcode):
+    """Stejné pořadí jako lookup(): EAN → kód → kód dodavatele (po tokenech).
+    Vrací (produkty, zdroj, uloženo_kdy) nebo ([], None, None)."""
+    try:
+        with open(CACHE, encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return [], None, None
+    products = data.get("products") or []
+    saved = (data.get("saved_at") or "")[:16].replace("T", " ")
+    for field, label in (("ean", "EAN"), ("code", "kód produktu")):
+        found = [p for p in products if (p.get(field) or "") == barcode]
+        if found:
+            return found[:2], label, saved
+    found = [p for p in products if barcode in (p.get("part_number") or "").split()]
+    if found:
+        return found[:5], "kód dodavatele", saved
+    return [], None, saved
+
+
+def je_odkaz(barcode):
+    b = barcode.lower()
+    return "://" in b or b.startswith("www.")
+
+
+def domena(barcode):
+    b = barcode.split("://", 1)[-1]
+    return b.split("/", 1)[0][:40]
+
+
 def print_it(product):
     from label_printer import render_label_image, print_label, default_length, importer_text_for
     name = product["name"]
@@ -139,30 +179,49 @@ def find_serial_port():
 
 def handle(barcode):
     emit("info", f"Naskenováno: {barcode}")
+
+    if je_odkaz(barcode):
+        emit("error", f"Naskenován QR kód s odkazem ({domena(barcode)}), ne čárový kód produktu",
+             barcode=barcode, kind="qr")
+        return
+
+    offline = None
     try:
         products, source = lookup(barcode)
     except Exception as e:
-        emit("error", f"Chyba spojení s databází: {e}")
-        return
+        products, source, saved = lookup_cache(barcode)
+        if saved is None:
+            emit("error", f"Chyba spojení s databází: {e}", barcode=barcode, kind="offline")
+            return
+        offline = saved
+        emit("info", f"Bez internetu – hledám v uloženém seznamu z {saved}")
 
     if not products:
         # repr ukáže i neviditelné znaky, pokud je čtečka přidává
-        emit("error", f"Produkt nenalezen: {barcode!r} (délka {len(barcode)})")
+        kde = f" (uložený seznam z {offline})" if offline else ""
+        emit("error", f"Produkt nenalezen: {barcode!r} (délka {len(barcode)}){kde}",
+             barcode=barcode, kind="nenalezen")
         return
 
     if len(products) > 1:
         codes = ", ".join(p["code"] for p in products)
-        emit("error", f"{barcode} má více produktů ({codes}) – vyber ručně")
+        emit("error", f"{barcode} má více produktů ({codes}) – vyber ručně",
+             barcode=barcode, kind="vice")
         return
 
     product = products[0]
     emit("info", f"Nalezeno přes {source}: {product['code']} – {product['name']}")
+    extra = dict(code=product["code"], name=product["name"], source=source, barcode=barcode,
+                 offline="1" if offline else None)
     try:
         ok, err = print_it(product)
     except Exception as e:
-        emit("error", f"Tisk selhal: {e}")
+        emit("error", f"Tisk selhal: {e}", kind="tisk", **extra)
         return
-    emit("ok", f"Vytištěno: {product['name']}") if ok else emit("error", f"Tisk selhal: {err}")
+    if ok:
+        emit("ok", f"Vytištěno: {product['name']}", **extra)
+    else:
+        emit("error", f"Tisk selhal: {err}", kind="tisk", **extra)
 
 
 def run():
