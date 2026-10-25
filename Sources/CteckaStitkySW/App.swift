@@ -23,9 +23,11 @@ struct CteckaStitkySWApp: App {
         WindowGroup {
             ContentView()
         }
-        .windowStyle(.hiddenTitleBar)
+        .windowToolbarStyle(UnifiedWindowToolbarStyle())
         .commands {
             CommandGroup(replacing: .newItem) {}
+            // ⌘P patří tlačítku Tisknout, ne systémové položce Tisk…
+            CommandGroup(replacing: .printItem) {}
         }
     }
 }
