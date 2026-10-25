@@ -4314,6 +4314,11 @@
   "je_displej": false,
   "potrebuje_sn": false
  },
+ "6338/WT": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
  "6341/ED": {
   "dovozce": "mobilesentrix",
   "je_displej": false,
@@ -5140,6 +5145,16 @@
   "potrebuje_sn": false
  },
  "71081": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71082": {
+  "dovozce": "mobilesentrix",
+  "je_displej": true,
+  "potrebuje_sn": false
+ },
+ "71083": {
   "dovozce": "mobilesentrix",
   "je_displej": true,
   "potrebuje_sn": false
@@ -7340,6 +7355,46 @@
   "potrebuje_sn": false
  },
  "9026": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9027": {
+  "dovozce": "mobilesentrix",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9028": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9029": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9030": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9031": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9032": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9033": {
+  "dovozce": "dyson",
+  "je_displej": false,
+  "potrebuje_sn": false
+ },
+ "9034": {
   "dovozce": "dyson",
   "je_displej": false,
   "potrebuje_sn": false
