@@ -1,554 +1,772 @@
 import SwiftUI
 import AppKit
+import Combine
 
 struct ContentView: View {
-    @State private var mode: AppMode = .manual
+    enum Mode: Hashable { case manual, scan }
 
-    enum AppMode { case manual, scan }
+    @StateObject private var products = ProductsViewModel()
+    @StateObject private var devices = DeviceMonitor()
+    @ObservedObject private var scan = ScanService.shared
+    @State private var mode: Mode = .manual
+    @State private var selected: Product?
+
+    /// Bez internetu se každou minutu tiše zkusí znovu načíst seznam z DB.
+    private let retry = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 0) {
-            // ── Tab bar ──────────────────────────────────────────
-            HStack(spacing: 0) {
-                ModeTab(title: "Ruční výběr", icon: "hand.tap", selected: mode == .manual) {
-                    mode = .manual
+            banner
+            if mode == .manual {
+                ManualView(products: products, devices: devices, selected: $selected)
+            } else {
+                ScanView(scan: scan, onSearchManually: searchManually)
+            }
+        }
+        .frame(minWidth: 920, minHeight: 600)
+        .navigationTitle("Štítky")
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Picker("Režim", selection: $mode) {
+                    Text("Ruční výběr").tag(Mode.manual)
+                    Text("Scan mód").tag(Mode.scan)
                 }
-                ModeTab(title: "Scan mód", icon: "barcode.viewfinder", selected: mode == .scan) {
-                    mode = .scan
+                .pickerStyle(SegmentedPickerStyle())
+                .labelsHidden()
+                .frame(width: 230)
+            }
+            ToolbarItem(placement: .automatic) {
+                HStack(spacing: 8) {
+                    printerPill
+                    if mode == .scan { scannerPill }
+                    databasePill
                 }
             }
-            .background(Color(NSColor.windowBackgroundColor))
+        }
+        .onAppear {
+            Task {
+                await products.load()
+                #if DEBUG
+                applyDemo()
+                #endif
+            }
+        }
+        .onReceive(retry) { _ in
+            if case .online = products.source { return }
+            if !products.isLoading { Task { await products.load() } }
+        }
+    }
+
+    // ── Horní lišta: stav zařízení a databáze ──────────────────────────
+    private var printerPill: some View {
+        switch devices.printerConnected {
+        case true?:  return StatusPill(label: "Tiskárna", level: .ok, help: "Brother QL-700 je připojená")
+        case false?: return StatusPill(label: "Tiskárna odpojená", level: .error,
+                                       help: "Tiskárna Brother nebyla na USB nalezena – zapni ji a zkontroluj kabel")
+        case nil:    return StatusPill(label: "Tiskárna", level: .unknown)
+        }
+    }
+
+    private var scannerPill: some View {
+        devices.scannerConnected == true
+            ? StatusPill(label: "Čtečka", level: .ok, help: "Čtečka je připojená")
+            : StatusPill(label: "Čtečka odpojená", level: .error, help: "Sériový port čtečky nenalezen")
+    }
+
+    private var databasePill: some View {
+        switch products.source {
+        case .online(let d): return StatusPill(label: "Online", level: .ok,
+                                               help: "Seznam produktů načten v \(timeFormatter.string(from: d))")
+        case .cache:         return StatusPill(label: "Offline", level: .warning, help: "Bez internetu – používá se uložený seznam")
+        case .failed:        return StatusPill(label: "Bez dat", level: .error, help: "Seznam produktů se nepodařilo načíst")
+        case .none:          return StatusPill(label: "Načítám", level: .unknown)
+        }
+    }
+
+    // ── Pruh pod lištou, když není internet ───────────────────────────
+    @ViewBuilder private var banner: some View {
+        switch products.source {
+        case .cache(let date):
+            BannerView(icon: "wifi.slash", color: Color(NSColor.systemOrange),
+                       text: "Bez internetu – používám uložený seznam produktů z \(dayTimeFormatter.string(from: date)). Tisk funguje normálně.",
+                       isLoading: products.isLoading) { Task { await products.load() } }
+        case .failed:
+            BannerView(icon: "exclamationmark.triangle.fill", color: Color(NSColor.systemRed),
+                       text: "Seznam produktů se nepodařilo načíst a uložená kopie zatím není. Zkontroluj připojení k internetu.",
+                       isLoading: products.isLoading) { Task { await products.load() } }
+        default:
+            EmptyView()
+        }
+    }
+
+    #if DEBUG
+    /// Jen pro vývoj (do release buildu se nedostane): STITKY_DEMO_SEARCH=kód předvybere
+    /// produkt, STITKY_DEMO_MODE=scan přepne na scan s ukázkovými událostmi.
+    private func applyDemo() {
+        let env = ProcessInfo.processInfo.environment
+        if let q = env["STITKY_DEMO_SEARCH"] {
+            products.search = q
+            selected = products.filtered.first
+        }
+        if env["STITKY_DEMO_MODE"] == "scan" {
+            mode = .scan
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                scan.stop()
+                scan.soundOn = false
+                scan.demoEvents(error: env["STITKY_DEMO_ERROR"] == "1")
+            }
+        }
+    }
+    #endif
+
+    /// Ze scan módu ("Hledat ručně") – přepne na ruční výběr s vyplněným kódem.
+    private func searchManually(_ code: String) {
+        products.search = code
+        let hits = products.filtered
+        selected = hits.count == 1 ? hits.first : nil
+        mode = .manual
+    }
+}
+
+struct BannerView: View {
+    let icon: String
+    let color: Color
+    let text: String
+    let isLoading: Bool
+    let retry: () -> Void
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Image(systemName: icon)
+            Text(text).fixedSize(horizontal: false, vertical: true)
+            Spacer()
+            if isLoading {
+                ProgressView().scaleEffect(0.5).frame(width: 16, height: 16)
+            } else {
+                Button("Zkusit znovu", action: retry).buttonStyle(QuietButtonStyle())
+            }
+        }
+        .font(.system(size: 12))
+        .foregroundColor(color)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 7)
+        .background(color.opacity(0.12))
+    }
+}
+
+// ── Ruční výběr ──────────────────────────────────────────────────────
+struct ManualView: View {
+    @ObservedObject var products: ProductsViewModel
+    @ObservedObject var devices: DeviceMonitor
+    @Binding var selected: Product?
+
+    var body: some View {
+        HSplitView {
+            ProductSidebar(products: products, selected: $selected)
+                .frame(minWidth: 280, idealWidth: 330, maxWidth: 420)
+            Group {
+                if let product = selected {
+                    ProductDetail(product: product, devices: devices)
+                        .id(product.code)       // nový produkt = čistý stav (kopie 1, náhled…)
+                } else {
+                    EmptyDetail()
+                }
+            }
+            .frame(minWidth: 560, maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+}
+
+struct ProductSidebar: View {
+    @ObservedObject var products: ProductsViewModel
+    @Binding var selected: Product?
+
+    var body: some View {
+        let list = products.filtered
+        VStack(spacing: 0) {
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass").foregroundColor(.secondary)
+                TextField("Kód, název, EAN nebo kód dodavatele", text: $products.search)
+                    .textFieldStyle(PlainTextFieldStyle())
+                if !products.search.isEmpty {
+                    Button { products.search = "" } label: {
+                        Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+            }
+            .padding(.horizontal, 9)
+            .padding(.vertical, 7)
+            .background(RoundedRectangle(cornerRadius: 8).fill(Color(NSColor.textBackgroundColor)))
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.primary.opacity(0.12), lineWidth: 0.5))
+            .padding(10)
 
             Divider()
 
-            if mode == .manual {
-                ManualView()
+            if list.isEmpty && !products.search.isEmpty {
+                VStack(spacing: 6) {
+                    Text("Nic nenalezeno").font(.headline)
+                    Text("Zkus jiná slova, kód nebo EAN.").font(.caption).foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                ScanView()
+                List(list, selection: $selected) { product in
+                    ProductRow(product: product).tag(product)
+                }
+                .listStyle(InsetListStyle())
             }
+
+            Divider()
+            HStack(spacing: 6) {
+                if products.isLoading { ProgressView().scaleEffect(0.5).frame(width: 14, height: 14) }
+                Text(footer(count: list.count)).font(.system(size: 11)).foregroundColor(.secondary)
+                Spacer()
+                Button { Task { await products.load() } } label: { Image(systemName: "arrow.clockwise") }
+                    .buttonStyle(PlainButtonStyle())
+                    .help("Znovu načíst seznam produktů")
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 6)
         }
-        .frame(minWidth: 820, minHeight: 540)
+    }
+
+    private func footer(count: Int) -> String {
+        let total = products.products.count
+        let n = products.search.isEmpty ? "\(total) produktů" : "\(count) z \(total)"
+        switch products.source {
+        case .online(let d): return "\(n) · načteno \(timeFormatter.string(from: d))"
+        case .cache(let d):  return "\(n) · uloženo \(dayTimeFormatter.string(from: d))"
+        default:             return products.isLoading ? "Načítám…" : n
+        }
     }
 }
 
-// ── Tab tlačítko ─────────────────────────────────────────────────
-struct ModeTab: View {
-    let title: String
-    let icon: String
-    let selected: Bool
-    let action: () -> Void
+struct ProductRow: View {
+    let product: Product
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: 6) {
-                Image(systemName: icon)
-                Text(title)
-            }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .background(selected ? Color.accentColor.opacity(0.12) : Color.clear)
-            .foregroundColor(selected ? .accentColor : .secondary)
-        }
-        .buttonStyle(.plain)
-        .overlay(
-            Group {
-                if selected {
-                    VStack { Spacer(); Rectangle().frame(height: 2).foregroundColor(.accentColor) }
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(spacing: 5) {
+                Text(product.code).font(.system(size: 13, weight: .semibold, design: .monospaced))
+                Spacer(minLength: 4)
+                if product.isActive {
+                    ForEach(product.tags) { Tag(text: $0.text, color: $0.color) }
+                } else {
+                    Text("není v Shoptetu").font(.system(size: 10)).foregroundColor(.secondary)
                 }
             }
-        )
+            Text(product.name).font(.system(size: 12)).foregroundColor(.secondary).lineLimit(2)
+        }
+        .padding(.vertical, 3)
+        .opacity(product.isActive ? 1 : 0.5)
     }
 }
 
-// ── Ruční výběr ──────────────────────────────────────────────────
-struct ManualView: View {
-    @StateObject private var vm = ProductsViewModel()
-    @State private var selected: Product?
+struct EmptyDetail: View {
+    var body: some View {
+        VStack(spacing: 10) {
+            Image(systemName: "tag").font(.system(size: 52)).foregroundColor(.secondary.opacity(0.35))
+            Text("Vyber produkt ze seznamu").font(.title3).foregroundColor(.secondary)
+            Text("Nebo přepni na Scan mód a štítky se budou tisknout po naskenování.")
+                .font(.caption).foregroundColor(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}
+
+// ── Detail produktu: náhled + tisk ───────────────────────────────────
+struct ProductDetail: View {
+    let product: Product
+    @ObservedObject var devices: DeviceMonitor
+
     @State private var labelImage: NSImage?
+    @State private var previewError: String?
     @State private var isGenerating = false
+    @State private var previewTask: Task<Void, Never>?
     @State private var isPrinting = false
     @State private var copies = 1
     @State private var lengthMM = 62
-    @State private var dpi600 = true
-    @State private var savedPath: String?
-    /// Výsledek poslední akce (náhled i tisk) – chyba se zobrazí červeně pod tlačítky.
-    @State private var lastResult: ActionResult?
-    @State private var pendingAction: PendingAction?
+    @State private var weee = true
     @State private var serialNumber = ""
+    @State private var result: PrintResult?
     @State private var activeAlert: ActiveAlert?
 
-    enum PendingAction { case generate, print }
+    enum PrintResult { case printed(count: Int, at: Date), error(String) }
     enum ActiveAlert: Identifiable {
         case weee, serialMissing
         var id: Int { hashValue }
     }
 
-    enum ActionResult { case printed, error(String) }
+    /// Ruční i scan tisk jedou na 300 DPI (rychlý tisk) – uživatel tak chtěl.
+    private let dpi600 = false
 
     var body: some View {
-        HSplitView {
-            // Levý panel – seznam
-            VStack(spacing: 0) {
-                HStack {
-                    Image(systemName: "magnifyingglass").foregroundColor(.secondary)
-                    TextField("Hledat kód, název, EAN nebo kód dodavatele…", text: $vm.search).textFieldStyle(.plain)
-                    if !vm.search.isEmpty {
-                        Button { vm.search = "" } label: {
-                            Image(systemName: "xmark.circle.fill").foregroundColor(.secondary)
-                        }.buttonStyle(.plain)
-                    }
-                }
-                .padding(10)
-                .background(Color(NSColor.controlBackgroundColor))
+        VStack(alignment: .leading, spacing: 0) {
+            header
+                .padding(.horizontal, 18)
+                .padding(.top, 16)
+                .padding(.bottom, 12)
 
-                Divider()
+            preview
+                .padding(.horizontal, 18)
 
-                List(vm.filtered, selection: $selected) { product in
-                    ProductRow(product: product).tag(product)
+            if product.needsSerialNumber {
+                HStack(spacing: 8) {
+                    Text("Sériové číslo").foregroundColor(.secondary)
+                    TextField("sériové číslo jednotky", text: $serialNumber)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(maxWidth: 260)
+                    Text("vytiskne se i druhý štítek jen se SN").font(.caption).foregroundColor(.secondary)
                 }
-                .listStyle(.inset)
-
-                Divider()
-                HStack {
-                    if vm.isLoading { ProgressView().scaleEffect(0.6) }
-                    Text(vm.isLoading ? "Načítám…" : "\(vm.products.count) produktů")
-                        .font(.caption).foregroundColor(.secondary)
-                    Spacer()
-                    Button { Task { await vm.load() } } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }.buttonStyle(.plain)
-                }
-                .padding(.horizontal, 10).padding(.vertical, 6)
+                .padding(.horizontal, 18)
+                .padding(.top, 12)
             }
-            .frame(minWidth: 280, maxWidth: 380)
 
-            // Pravý panel – náhled + tisk
-            VStack(spacing: 0) {
-                if let product = selected {
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(product.code).font(.headline)
-                                Text(product.name).font(.subheadline).foregroundColor(.secondary).lineLimit(2)
-                                if let pn = product.part_number, !pn.isEmpty {
-                                    Text("Dodavatel: \(pn)")
-                                        .font(.caption).foregroundColor(.secondary)
-                                }
-                            }
-                            Spacer()
-                            if product.isDisplay {
-                                Label("Displej", systemImage: "rectangle.fill")
-                                    .font(.caption)
-                                    .padding(.horizontal, 8).padding(.vertical, 3)
-                                    .background(Color.blue.opacity(0.15))
-                                    .foregroundColor(.blue)
-                                    .cornerRadius(6)
-                            }
-                        }
+            notices
+                .padding(.horizontal, 18)
+                .padding(.top, 10)
 
-                        HStack(spacing: 16) {
-                            HStack {
-                                Text("Délka:").foregroundColor(.secondary)
-                                TextField("", text: Binding(
-                                    get: { "\(lengthMM)" },
-                                    set: { if let v = Int($0) { lengthMM = v } }
-                                ))
-                                .frame(width: 60).textFieldStyle(.roundedBorder)
-                                Text("mm").foregroundColor(.secondary)
-                            }
-                            HStack(spacing: 4) {
-                                Text("Kopií:").foregroundColor(.secondary)
-                                Button {
-                                    if copies > 1 { copies -= 1 }
-                                } label: {
-                                    Image(systemName: "minus")
-                                        .frame(width: 32, height: 32)
-                                        .background(Color(NSColor.controlBackgroundColor))
-                                        .cornerRadius(6)
-                                }
-                                .buttonStyle(.plain)
-                                Text("\(copies)")
-                                    .frame(width: 32)
-                                    .multilineTextAlignment(.center)
-                                    .font(.body.monospacedDigit())
-                                Button {
-                                    if copies < 50 { copies += 1 }
-                                } label: {
-                                    Image(systemName: "plus")
-                                        .frame(width: 32, height: 32)
-                                        .background(Color(NSColor.controlBackgroundColor))
-                                        .cornerRadius(6)
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            Picker("", selection: $dpi600) {
-                                Text("300 DPI").tag(false)
-                                Text("600 DPI").tag(true)
-                            }
-                            .pickerStyle(.segmented)
-                            .frame(width: 140)
-                            .help("Kvalita tisku – 600 DPI je ostřejší, ale pomalejší")
-                            Spacer()
-                            Button {
-                                Task { await generate(product: product) }
-                            } label: {
-                                Label("Náhled", systemImage: "eye")
-                            }
-                            .buttonStyle(.bordered)
-                            .disabled(isGenerating || isPrinting)
-
-                            Button {
-                                Task { await doPrint(product: product) }
-                            } label: {
-                                if isPrinting {
-                                    ProgressView().scaleEffect(0.7).frame(width: 16, height: 16)
-                                } else {
-                                    Label("Tisknout", systemImage: "printer")
-                                }
-                            }
-                            .buttonStyle(.bordered)
-                            .disabled(isGenerating || isPrinting)
-                        }
-
-                        if product.needsSerialNumber {
-                            HStack {
-                                Text("Sériové číslo:").foregroundColor(.secondary)
-                                TextField("vepiš sériové číslo jednotky…", text: $serialNumber)
-                                    .textFieldStyle(.roundedBorder)
-                                    .frame(maxWidth: 260)
-                            }
-                        }
-
-                        // Výsledek poslední akce (tisk / náhled)
-                        if let r = lastResult {
-                            HStack(alignment: .top, spacing: 6) {
-                                switch r {
-                                case .printed:
-                                    Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
-                                    Text("Vytištěno").foregroundColor(.green)
-                                case .error(let msg):
-                                    Image(systemName: "xmark.circle.fill").foregroundColor(.red)
-                                    Text(msg).foregroundColor(.red)
-                                        .lineLimit(6)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                }
-                            }
-                            .font(.caption)
-                        }
-                    }
-                    .padding(16)
-                    .background(Color(NSColor.controlBackgroundColor))
-
-                    Divider()
-
-                    ZStack {
-                        Color(NSColor.windowBackgroundColor)
-                        if isGenerating {
-                            VStack(spacing: 12) {
-                                ProgressView()
-                                Text("Generuji náhled…").foregroundColor(.secondary)
-                            }
-                        } else if let img = labelImage {
-                            VStack(spacing: 16) {
-                                Image(nsImage: img)
-                                    .resizable().scaledToFit()
-                                    .padding(20)
-                                    .background(Color.white)
-                                    .cornerRadius(8)
-                                    .shadow(color: .black.opacity(0.12), radius: 8, x: 0, y: 2)
-                                    .padding()
-
-                                HStack(spacing: 12) {
-                                    if let path = savedPath {
-                                        Label(path, systemImage: "checkmark.circle.fill")
-                                            .font(.caption).foregroundColor(.green)
-                                            .lineLimit(1).truncationMode(.middle)
-                                    }
-                                    Spacer()
-                                    Button { savePNG(image: img, code: product.code) } label: {
-                                        Label("Uložit PNG", systemImage: "square.and.arrow.down")
-                                    }.buttonStyle(.bordered)
-                                }
-                                .padding(.horizontal, 20).padding(.bottom, 16)
-                            }
-                        } else {
-                            VStack(spacing: 8) {
-                                Image(systemName: "tag")
-                                    .font(.system(size: 48)).foregroundColor(.secondary.opacity(0.4))
-                                Text("Klikni Náhled nebo rovnou Tisknout")
-                                    .foregroundColor(.secondary)
-                            }
-                        }
-                    }
-                } else {
-                    VStack(spacing: 12) {
-                        Image(systemName: "tag.fill")
-                            .font(.system(size: 64)).foregroundColor(.secondary.opacity(0.25))
-                        Text("Vyber produkt ze seznamu")
-                            .font(.title3).foregroundColor(.secondary)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(NSColor.windowBackgroundColor))
-                }
-            }
-            .frame(minWidth: 500)
+            Divider().padding(.top, 12)
+            actionBar
+                .padding(.horizontal, 18)
+                .padding(.vertical, 12)
         }
-        .onAppear { Task { await vm.load() } }
+        .onAppear {
+            lengthMM = product.defaultLength
+            weee = WEEEPrefs.shared.get(for: product.code)
+            schedulePreview(delay: 0)
+        }
+        .onChange(of: lengthMM) { _ in schedulePreview() }
+        .onChange(of: weee) { _ in schedulePreview() }
+        .onChange(of: serialNumber) { _ in schedulePreview(delay: 450_000_000) }
+        .onDisappear { previewTask?.cancel() }
         .alert(item: $activeAlert) { alert in
             switch alert {
             case .weee:
                 return Alert(
                     title: Text("Zobrazit ikonu přeškrtnuté popelnice (WEEE)?"),
                     message: Text("Volba se uloží pro příští tisky tohoto produktu."),
-                    primaryButton: .default(Text("Ano – zobrazit")) {
-                        if let p = selected {
-                            Task { await WEEEPrefs.shared.set(true, for: p.code) }
-                            runPendingAction(product: p)
-                        }
-                    },
-                    secondaryButton: .cancel(Text("Ne – nezobrazovat")) {
-                        if let p = selected {
-                            Task { await WEEEPrefs.shared.set(false, for: p.code) }
-                            runPendingAction(product: p)
-                        }
-                    }
+                    primaryButton: .default(Text("Ano – zobrazit")) { chooseWEEE(true, thenPrint: true) },
+                    secondaryButton: .cancel(Text("Ne – nezobrazovat")) { chooseWEEE(false, thenPrint: true) }
                 )
             case .serialMissing:
-                return Alert(
-                    title: Text("Chybí sériové číslo"),
-                    message: Text("Před tiskem vepiš sériové číslo této jednotky."),
-                    dismissButton: .default(Text("OK"))
-                )
+                return Alert(title: Text("Chybí sériové číslo"),
+                             message: Text("Před tiskem vepiš sériové číslo této jednotky."),
+                             dismissButton: .default(Text("OK")))
             }
-        }
-        .onChange(of: selected) { product in
-            labelImage = nil
-            savedPath = nil
-            lastResult = nil
-            serialNumber = ""
-            if let p = product { lengthMM = p.defaultLength }
         }
     }
 
+    // Název: zařízení velkým písmem, díl nad ním; pod tím kódy.
+    private var header: some View {
+        let parts = product.nameParts
+        return VStack(alignment: .leading, spacing: 5) {
+            if let device = parts.device {
+                Text(parts.detail).font(.system(size: 13)).foregroundColor(.secondary).lineLimit(2)
+                Text(device).font(.system(size: 22, weight: .semibold)).lineLimit(2)
+            } else {
+                Text(parts.detail).font(.system(size: 20, weight: .semibold)).lineLimit(3)
+            }
+            HStack(spacing: 6) {
+                Tag(text: product.code, color: .primary, mono: true)
+                Tag(text: "EAN \(product.ean)", mono: true)
+                if let pn = product.part_number, !pn.isEmpty {
+                    Tag(text: "dodavatel \(pn)", mono: true)
+                }
+                Tag(text: product.importerLabel ?? "dovozce podle názvu")
+                if product.isDisplay { Tag(text: "Displej", color: Color(NSColor.systemBlue)) }
+                if !product.isActive { Tag(text: "není v Shoptetu", color: Color(NSColor.systemOrange)) }
+            }
+            .padding(.top, 3)
+        }
+    }
+
+    private var preview: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 10).fill(Color.primary.opacity(0.05))
+            if let img = labelImage {
+                Image(nsImage: img)
+                    .resizable()
+                    .interpolation(.high)
+                    .scaledToFit()
+                    .background(Color.white)
+                    .cornerRadius(3)
+                    .shadow(color: Color.black.opacity(0.18), radius: 5, x: 0, y: 2)
+                    .padding(24)
+                    .contextMenu {
+                        Button("Uložit PNG…") { savePNG(image: img) }
+                    }
+            } else if let err = previewError, !isGenerating {
+                VStack(spacing: 6) {
+                    Image(systemName: "exclamationmark.triangle").font(.system(size: 26))
+                    Text("Náhled se nepodařilo vytvořit").font(.headline)
+                    Text(err).font(.caption).lineLimit(4).multilineTextAlignment(.center)
+                }
+                .foregroundColor(Color(NSColor.systemRed))
+                .padding()
+            }
+            if isGenerating {
+                VStack {
+                    HStack { Spacer(); ProgressView().scaleEffect(0.6).frame(width: 18, height: 18) }
+                    Spacer()
+                }
+                .padding(10)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+    }
+
+    // Varování a výsledek tisku – nad spodní lištou, ať se vejde i delší chyba.
+    @ViewBuilder private var notices: some View {
+        if devices.printerConnected == false {
+            Label("Tiskárna není připojená – zapni Brother QL-700 a zkontroluj USB kabel.",
+                  systemImage: "exclamationmark.triangle.fill")
+                .font(.system(size: 12))
+                .foregroundColor(Color(NSColor.systemOrange))
+        }
+        if case .error(let msg) = result {
+            HStack(alignment: .top, spacing: 6) {
+                Image(systemName: "xmark.circle.fill")
+                Text(msg).lineLimit(5).fixedSize(horizontal: false, vertical: true)
+            }
+            .font(.system(size: 12))
+            .foregroundColor(Color(NSColor.systemRed))
+        }
+    }
+
+    private var actionBar: some View {
+        HStack(spacing: 18) {
+            Picker("Délka", selection: $lengthMM) {
+                Text("62 mm").tag(62)
+                Text("125 mm").tag(125)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .labelsHidden()
+            .frame(width: 150)
+            .help("Délka štítku – 125 mm pro displeje")
+
+            HStack(spacing: 6) {
+                Text("Kopií").foregroundColor(.secondary)
+                Button { if copies > 1 { copies -= 1 } } label: { Image(systemName: "minus") }
+                    .buttonStyle(QuietButtonStyle())
+                Text("\(copies)")
+                    .font(Font.system(size: 15, weight: .semibold).monospacedDigit())
+                    .frame(minWidth: 24)
+                Button { if copies < 50 { copies += 1 } } label: { Image(systemName: "plus") }
+                    .buttonStyle(QuietButtonStyle())
+            }
+
+            Toggle("Ikona WEEE", isOn: Binding(
+                get: { weee },
+                set: { chooseWEEE($0, thenPrint: false) }
+            ))
+            .toggleStyle(CheckboxToggleStyle())
+            .fixedSize()
+            .help("Přeškrtnutá popelnice – volba se uloží pro tento produkt")
+
+            Spacer()
+
+            if case .printed(let count, let at) = result {
+                Label("Vytištěno \(count)× · \(timeFormatter.string(from: at))", systemImage: "checkmark.circle.fill")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(Color(NSColor.systemGreen))
+            }
+
+            Button(action: printTapped) {
+                HStack(spacing: 6) {
+                    if isPrinting {
+                        ProgressView().scaleEffect(0.5).frame(width: 14, height: 14)
+                    } else {
+                        Image(systemName: "printer.fill")
+                    }
+                    Text(isPrinting ? "Tisknu…" : "Tisknout")
+                }
+                .fixedSize()
+            }
+            .buttonStyle(PrimaryButtonStyle())
+            .keyboardShortcut("p", modifiers: .command)
+            .disabled(isPrinting)
+            .help("Vytisknout (⌘P)")
+        }
+    }
+
+    // ── Akce ──────────────────────────────────────────────────────
     private var trimmedSerial: String? {
         let s = serialNumber.trimmingCharacters(in: .whitespaces)
         return s.isEmpty ? nil : s
     }
 
-    /// Vrátí false a ukáže upozornění, pokud produkt vyžaduje sériové číslo a není vyplněné.
-    private func requireSerialIfNeeded(_ product: Product) -> Bool {
-        guard product.needsSerialNumber, trimmedSerial == nil else { return true }
-        activeAlert = .serialMissing
-        return false
-    }
-
-    private func generate(product: Product) async {
-        guard requireSerialIfNeeded(product) else { return }
-        if !WEEEPrefs.shared.hasChoice(for: product.code) {
-            await MainActor.run {
-                pendingAction = .generate
-                activeAlert = .weee
-            }
-            return
-        }
-        await doGenerate(product: product)
-    }
-
-    private func doGenerate(product: Product) async {
+    private func schedulePreview(delay: UInt64 = 150_000_000) {
+        previewTask?.cancel()
+        let p = product, length = lengthMM, w = weee, serial = trimmedSerial
         isGenerating = true
-        labelImage = nil
-        lastResult = nil
-        let weee = WEEEPrefs.shared.get(for: product.code)
-        let (image, err) = await LabelGenerator.generate(
-            code: product.code, name: product.name, lengthMM: lengthMM, dpi600: dpi600, weee: weee,
-            serial: trimmedSerial, importer: product.dovozce
-        )
-        labelImage = image
-        if let err = err { lastResult = .error(err) }
-        isGenerating = false
+        previewTask = Task {
+            if delay > 0 { try? await Task.sleep(nanoseconds: delay) }
+            if Task.isCancelled { return }
+            let (img, err) = await LabelGenerator.generate(
+                code: p.code, name: p.name, lengthMM: length, dpi600: false, weee: w,
+                serial: serial, importer: p.dovozce)
+            if Task.isCancelled { return }
+            await MainActor.run {
+                if let img = img { labelImage = img }
+                previewError = err
+                isGenerating = false
+            }
+        }
     }
 
-    private func doPrint(product: Product) async {
-        guard requireSerialIfNeeded(product) else { return }
-        if !WEEEPrefs.shared.hasChoice(for: product.code) {
-            await MainActor.run {
-                pendingAction = .print
-                activeAlert = .weee
-            }
+    private func chooseWEEE(_ value: Bool, thenPrint: Bool) {
+        weee = value
+        let code = product.code
+        Task { await WEEEPrefs.shared.set(value, for: code) }
+        if thenPrint { Task { await doPrint() } }
+    }
+
+    private func printTapped() {
+        if product.needsSerialNumber && trimmedSerial == nil {
+            activeAlert = .serialMissing
             return
         }
-        await doActualPrint(product: product)
+        if !WEEEPrefs.shared.hasChoice(for: product.code) {
+            activeAlert = .weee
+            return
+        }
+        Task { await doPrint() }
     }
 
-    private func doActualPrint(product: Product) async {
-        isPrinting = true
-        lastResult = nil
-        let weee = WEEEPrefs.shared.get(for: product.code)
+    private func doPrint() async {
+        await MainActor.run { isPrinting = true; result = nil }
+        let n = copies
         let (ok, err) = await PrintService.shared.print(
-            code: product.code, name: product.name, lengthMM: lengthMM, copies: copies, dpi600: dpi600, weee: weee,
-            serial: trimmedSerial, importer: product.dovozce
-        )
-        isPrinting = false
-        lastResult = ok ? .printed : .error(err ?? "Neznámá chyba")
-    }
-
-    private func runPendingAction(product: Product) {
-        let action = pendingAction
-        pendingAction = nil
-        Task {
-            switch action {
-            case .generate: await doGenerate(product: product)
-            case .print:    await doActualPrint(product: product)
-            case nil:       break
-            }
+            code: product.code, name: product.name, lengthMM: lengthMM, copies: n, dpi600: dpi600, weee: weee,
+            serial: trimmedSerial, importer: product.dovozce)
+        await MainActor.run {
+            isPrinting = false
+            result = ok ? .printed(count: n, at: Date()) : .error(err ?? "Neznámá chyba")
         }
     }
 
-    private func savePNG(image: NSImage, code: String) {
+    private func savePNG(image: NSImage) {
         let panel = NSSavePanel()
-        panel.nameFieldStringValue = "stitek_\(code).png"
-        panel.allowedContentTypes = [.png]
+        panel.nameFieldStringValue = "stitek_\(product.code.replacingOccurrences(of: "/", with: "_")).png"
+        panel.allowedFileTypes = ["png"]
         panel.begin { resp in
-            guard resp == .OK, let url = panel.url else { return }
-            if let tiff = image.tiffRepresentation,
-               let rep = NSBitmapImageRep(data: tiff),
-               let data = rep.representation(using: .png, properties: [:]) {
-                try? data.write(to: url)
-                savedPath = url.lastPathComponent
-            }
+            guard resp == .OK, let url = panel.url,
+                  let tiff = image.tiffRepresentation,
+                  let rep = NSBitmapImageRep(data: tiff),
+                  let data = rep.representation(using: .png, properties: [:]) else { return }
+            try? data.write(to: url)
         }
     }
 }
 
-// ── Scan mód ─────────────────────────────────────────────────────
+// ── Scan mód ─────────────────────────────────────────────────────────
 struct ScanView: View {
-    @StateObject private var scan = ScanService.shared
+    @ObservedObject var scan: ScanService
+    let onSearchManually: (String) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
-            // Toolbar
-            HStack(spacing: 12) {
+            HStack(spacing: 10) {
                 Circle()
-                    .fill(scan.isRunning ? Color.green : Color.gray.opacity(0.4))
-                    .frame(width: 10, height: 10)
-                Text(scan.isRunning ? "Aktivní – skenuj produkt" : "Zastaven")
+                    .fill(scan.isRunning ? Color(NSColor.systemGreen) : Color.secondary.opacity(0.4))
+                    .frame(width: 9, height: 9)
+                Text(scan.isRunning ? "Připraveno – naskenuj produkt, štítek se vytiskne sám" : "Scan mód je zastavený")
                     .foregroundColor(scan.isRunning ? .primary : .secondary)
                 Spacer()
+                Button { scan.soundOn.toggle() } label: {
+                    Image(systemName: scan.soundOn ? "speaker.wave.2.fill" : "speaker.slash.fill")
+                }
+                .buttonStyle(QuietButtonStyle())
+                .help(scan.soundOn ? "Zvuk zapnutý – kliknutím vypneš" : "Zvuk vypnutý – kliknutím zapneš")
                 Button {
                     if scan.isRunning { scan.stop() } else { scan.start() }
                 } label: {
                     Label(scan.isRunning ? "Zastavit" : "Spustit",
-                          systemImage: scan.isRunning ? "stop.circle" : "play.circle")
+                          systemImage: scan.isRunning ? "stop.fill" : "play.fill")
                 }
-                .buttonStyle(.bordered)
-                .foregroundColor(scan.isRunning ? .red : .green)
+                .buttonStyle(QuietButtonStyle())
             }
-            .padding(16)
-            .background(Color(NSColor.controlBackgroundColor))
+            .padding(.horizontal, 18)
+            .padding(.vertical, 10)
 
             Divider()
 
-            // Log událostí
-            if scan.events.isEmpty {
-                VStack(spacing: 12) {
-                    Image(systemName: "barcode.viewfinder")
-                        .font(.system(size: 56)).foregroundColor(.secondary.opacity(0.3))
-                    Text("Spusť scan mód a naskenuj produkt")
-                        .foregroundColor(.secondary)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(Color(NSColor.windowBackgroundColor))
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: 2) {
-                        ForEach(scan.events) { ev in
-                            ScanEventRow(event: ev)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 14) {
+                    ScanResultCard(event: scan.lastResult, onSearchManually: onSearchManually)
+
+                    if !historyRows.isEmpty {
+                        HStack {
+                            Text("Historie").font(.headline)
+                            Spacer()
+                            Text("Od spuštění: \(scan.printedCount) vytištěno · \(scan.errorCount) chyb")
+                                .font(.caption).foregroundColor(.secondary)
                         }
+                        .padding(.top, 4)
+
+                        VStack(spacing: 0) {
+                            ForEach(historyRows) { row in
+                                ScanHistoryRow(row: row)
+                                if row.id != historyRows.last?.id { Divider() }
+                            }
+                        }
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.primary.opacity(0.03)))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.primary.opacity(0.1), lineWidth: 0.5))
                     }
-                    .padding(12)
                 }
-                .background(Color(NSColor.windowBackgroundColor))
+                .padding(18)
             }
         }
+        .onAppear { if !scan.isRunning { scan.start() } }
+    }
+
+    /// Výsledky skenů (bez info hlášek); stejný produkt naskenovaný víckrát za sebou = jeden řádek ×N.
+    private var historyRows: [ScanHistoryRow.Row] {
+        var rows: [ScanHistoryRow.Row] = []
+        for ev in scan.events where ev.status != .info {
+            if let last = rows.last, ev.status == .ok, last.event.status == .ok,
+               last.event.code != nil, last.event.code == ev.code,
+               abs(last.event.date.timeIntervalSince(ev.date)) < 120 {
+                rows[rows.count - 1].count += 1
+            } else {
+                rows.append(ScanHistoryRow.Row(event: ev))
+            }
+            if rows.count >= 150 { break }
+        }
+        return rows
     }
 }
 
-struct ScanEventRow: View {
-    let event: ScanEvent
+struct ScanResultCard: View {
+    let event: ScanEvent?
+    let onSearchManually: (String) -> Void
 
     var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: icon)
-                .foregroundColor(color)
-                .frame(width: 16)
-            Text(event.msg)
-                .font(.system(.body, design: .monospaced))
-                .foregroundColor(.primary)
-        }
-        .padding(.vertical, 3)
-    }
-
-    var icon: String {
-        switch event.status {
-        case .ok:    return "checkmark.circle.fill"
-        case .error: return "xmark.circle.fill"
-        case .info:  return "info.circle"
-        }
-    }
-
-    var color: Color {
-        switch event.status {
-        case .ok:    return .green
-        case .error: return .red
-        case .info:  return .secondary
-        }
-    }
-}
-
-// ── Řádek v seznamu ───────────────────────────────────────────────
-struct ProductRow: View {
-    let product: Product
-    var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            HStack {
-                Text(product.code)
-                    .font(.system(.body, design: .monospaced))
-                    .fontWeight(.medium)
+        if let ev = event {
+            HStack(alignment: .center, spacing: 16) {
+                ZStack {
+                    Circle().fill(Color(NSColor.windowBackgroundColor)).frame(width: 56, height: 56)
+                    Image(systemName: icon(ev)).font(.system(size: 26, weight: .bold)).foregroundColor(color(ev))
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(caption(ev)).font(.system(size: 12, weight: .medium)).foregroundColor(color(ev))
+                    Text(title(ev)).font(.system(size: 20, weight: .semibold)).lineLimit(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if let sub = subtitle(ev) {
+                        Text(sub)
+                            .font(ev.status == .ok ? .system(size: 12, design: .monospaced) : .system(size: 12))
+                            .foregroundColor(.secondary)
+                    }
+                }
                 Spacer()
-                Text("\(product.defaultLength)mm")
-                    .font(.caption2).foregroundColor(.secondary)
+                if ev.status == .error, let code = ev.barcode, ev.kind != "qr" {
+                    Button { onSearchManually(code) } label: {
+                        Label("Hledat ručně", systemImage: "magnifyingglass")
+                    }
+                    .buttonStyle(QuietButtonStyle())
+                }
             }
-            Text(product.name)
-                .font(.caption).foregroundColor(.secondary).lineLimit(1)
+            .padding(20)
+            .background(RoundedRectangle(cornerRadius: 12).fill(color(ev).opacity(0.13)))
+        } else {
+            VStack(spacing: 10) {
+                Image(systemName: "barcode.viewfinder").font(.system(size: 54)).foregroundColor(.secondary.opacity(0.4))
+                Text("Naskenuj produkt").font(.title3)
+                Text("EAN, náš kód i kód dodavatele (MobileSentrix, Apple). Štítek se vytiskne automaticky.")
+                    .font(.caption).foregroundColor(.secondary)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 40)
+            .background(RoundedRectangle(cornerRadius: 12).fill(Color.primary.opacity(0.04)))
         }
-        .padding(.vertical, 2)
+    }
+
+    private func isQR(_ e: ScanEvent) -> Bool { e.kind == "qr" }
+
+    private func color(_ e: ScanEvent) -> Color {
+        if e.status == .ok { return Color(NSColor.systemGreen) }
+        return isQR(e) ? Color(NSColor.systemOrange) : Color(NSColor.systemRed)
+    }
+
+    private func icon(_ e: ScanEvent) -> String {
+        if e.status == .ok { return "checkmark" }
+        return isQR(e) ? "qrcode" : "xmark"
+    }
+
+    private func caption(_ e: ScanEvent) -> String {
+        let t = timeSecFormatter.string(from: e.date)
+        switch e.status {
+        case .ok: return "Vytištěno · \(t)" + (e.offline ? " · bez internetu" : "")
+        default:
+            switch e.kind {
+            case "qr": return "QR kód · \(t)"
+            case "nenalezen": return "Nenalezeno · \(t)"
+            case "vice": return "Více produktů · \(t)"
+            case "tisk": return "Tisk selhal · \(t)"
+            case "offline": return "Bez internetu · \(t)"
+            default: return "Chyba · \(t)"
+            }
+        }
+    }
+
+    private func title(_ e: ScanEvent) -> String {
+        if e.status == .ok, let name = e.name { return name }
+        if e.kind == "nenalezen", let b = e.barcode { return "Kód \(b) není v databázi" }
+        return e.msg
+    }
+
+    private func subtitle(_ e: ScanEvent) -> String? {
+        if e.status == .ok, let code = e.code {
+            return e.source.map { "\(code) · nalezeno přes \($0)" } ?? code
+        }
+        if e.kind == "nenalezen" { return "Doplň ho v Shoptetu jako part number, nebo vyber produkt ručně" }
+        if e.kind == "tisk", let name = e.name { return name }
+        return nil
     }
 }
 
-// ── ViewModel ─────────────────────────────────────────────────────
-class ProductsViewModel: ObservableObject {
-    @Published var products: [Product] = []
-    @Published var search = ""
-    @Published var isLoading = false
-
-    var filtered: [Product] {
-        guard !search.isEmpty else { return products }
-        let q = search.lowercased()
-        return products.filter {
-            $0.code.lowercased().contains(q)
-                || $0.name.lowercased().contains(q)
-                || $0.ean.contains(q)
-                || ($0.part_number?.lowercased().contains(q) ?? false)
+struct ScanHistoryRow: View {
+    private func text(_ ev: ScanEvent) -> String {
+        if ev.status == .ok { return ev.name ?? ev.msg }
+        switch ev.kind {
+        case "nenalezen": return "Nenalezeno v databázi"
+        case "vice": return "Kód patří více produktům – vyber ručně"
+        case "tisk": return "Tisk selhal" + (ev.name.map { ": \($0)" } ?? "")
+        default: return ev.msg
         }
     }
 
-    func load() async {
-        await MainActor.run { isLoading = true }
-        do {
-            let result = try await SupabaseService.shared.fetchAll()
-            await MainActor.run { self.products = result; self.isLoading = false }
-        } catch {
-            await MainActor.run { isLoading = false }
+    struct Row: Identifiable {
+        let event: ScanEvent
+        var count = 1
+        var id: UUID { event.id }
+    }
+
+    let row: Row
+
+    var body: some View {
+        let ev = row.event
+        return HStack(spacing: 10) {
+            Text(timeFormatter.string(from: ev.date))
+                .font(.system(size: 12, design: .monospaced))
+                .foregroundColor(.secondary)
+                .frame(width: 44, alignment: .leading)
+            Image(systemName: ev.status == .ok ? "checkmark" : (ev.kind == "qr" ? "qrcode" : "xmark"))
+                .foregroundColor(ev.status == .ok ? Color(NSColor.systemGreen)
+                                 : (ev.kind == "qr" ? Color(NSColor.systemOrange) : Color(NSColor.systemRed)))
+                .frame(width: 16)
+            Text(text(ev)).lineLimit(1)
+            if row.count > 1 {
+                Text("×\(row.count)").foregroundColor(.secondary)
+            }
+            Spacer()
+            if let code = ev.code ?? (ev.kind == "qr" ? nil : ev.barcode) {
+                Text(code).font(.system(size: 12, design: .monospaced)).foregroundColor(.secondary)
+            }
         }
+        .font(.system(size: 13))
+        .padding(.horizontal, 12)
+        .padding(.vertical, 7)
     }
 }
